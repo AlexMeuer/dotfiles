@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 NEW_SCRIPT_NAME" >&2
+  exit 1
+fi
+HOME=`eval echo ~`
+FILEPATH="${HOME}/repos/alexmeuer/dotfiles/${1}"
+if [ -e "${FILEPATH}" ]; then
+  echo "${1} already exists" >&2
+  exit 1
+fi
+
+touch ${FILEPATH} && echo "#!/usr/bin/env sh\npwd\nexit \$?" > ${FILEPATH} && nvim ${FILEPATH} && chmod +x ${FILEPATH}
+exit $?
