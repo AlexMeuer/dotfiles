@@ -6,10 +6,3 @@ ln -s ${DIR}/.skhdrc ${HOME}/.skhdrc
 
 brew services restart yabai
 brew services restart skhd
-
-if [ "${SHELL}" = "`which fish`" ]; then
-    echo "set -Ua fish_user_paths \"${DIR}/scripts\"" | fish \
-        && echo "Added ${DIR}/scripts to fish_user_paths."
-else
-    echo "Your shell isn't fish, so ${DIR}/scripts to your PATH however you normally do it."
-fi
