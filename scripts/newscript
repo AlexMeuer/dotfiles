@@ -4,7 +4,7 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 HOME=`eval echo ~`
-FILEPATH="${HOME}/repos/alexmeuer/dotfiles/${1}"
+FILEPATH="${HOME}/repos/alexmeuer/dotfiles/scripts/${1}"
 if [ -e "${FILEPATH}" ]; then
   echo "${1} already exists" >&2
   exit 1
