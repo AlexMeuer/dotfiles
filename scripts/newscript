@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 if [ "$#" -ne 1 ]; then
   echo "Usage: $0 NEW_SCRIPT_NAME" >&2
   exit 1
@@ -10,5 +10,5 @@ if [ -e "${FILEPATH}" ]; then
   exit 1
 fi
 
-touch ${FILEPATH} && echo "#!/usr/bin/env sh\npwd\nexit \$?" > ${FILEPATH} && nvim ${FILEPATH} && chmod +x ${FILEPATH}
+touch ${FILEPATH} && echo "#!/bin/sh\npwd\nexit \$?" > ${FILEPATH} && nvim ${FILEPATH} && chmod +x ${FILEPATH}
 exit $?

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 STEM="ShoutCo/Off-The-Court"
 
