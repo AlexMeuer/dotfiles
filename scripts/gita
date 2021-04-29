@@ -1,3 +1,2 @@
 #!/bin/sh
-git add --all
-exit $?
+exec git add --all

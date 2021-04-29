@@ -1,3 +1,2 @@
 #!/bin/sh
-git status
-exit $?
+exec git status

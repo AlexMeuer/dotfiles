@@ -1,3 +1,2 @@
 #!/bin/sh
-flutter run --web-port 3001
-exit $?
+exec flutter run --web-port 3001
