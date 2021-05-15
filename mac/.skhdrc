@@ -199,6 +199,9 @@ lctrl + alt - right : \
 shift + alt - c : yabai -m window --toggle float;\
                   yabai -m window --grid 4:4:1:1:2:2
 
+# Toggle sticky window
+shift + alt - s : yabai -m window --toggle sticky
+
 # Equalize size of windows
 lctrl + alt - 0 : yabai -m space --balance
 
