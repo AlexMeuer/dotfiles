@@ -7,7 +7,8 @@ HOME=`eval echo ~`
 FILEPATH="${HOME}/repos/alexmeuer/dotfiles/scripts/${1}"
 if [ -e "${FILEPATH}" ]; then
   echo "${1} already exists" >&2
-  exit 1
+  nvim "${FILEPATH}"
+  exit $?
 fi
 
 touch ${FILEPATH} && echo "#!/bin/sh\npwd\nexit \$?" > ${FILEPATH} && nvim ${FILEPATH} && chmod +x ${FILEPATH}

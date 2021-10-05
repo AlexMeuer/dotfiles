@@ -1,3 +1,7 @@
+" TODO TODO TODO
+"   Only use init.vim for sourcing other files.
+" TODO TODO TODO
+
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
@@ -17,11 +21,19 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'fatih/vim-go'
 
 Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-"Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+"Dart/Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 
 " Initialize plugin system
 call plug#end()
+
+source $HOME/.config/nvim/themes/airline.vim
 
 inoremap jk <ESC>
 nmap <C-n> :NERDTreeToggle<CR>
@@ -100,7 +112,9 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-json', 
-  \ 'coc-go'
+  \ 'coc-go',
+  \ 'coc-snippets',
+  \ 'coc-highlight'
   \ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
@@ -116,15 +130,17 @@ set signcolumn=yes
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -165,14 +181,6 @@ nmap <F2> <Plug>(coc-rename)
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -222,3 +230,17 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+" tab navigation: Alt or Ctrl+Shift may not work in terminal:
+" http://vim.wikia.com/wiki/Alternative_tab_navigation
+" Tab navigation like Firefox: only 'open new tab' works in terminal
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
+" move to the previous/next tabpage.
+nnoremap <C-j> gT
+nnoremap <C-k> gt
+" Go to last active tab 
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>

@@ -1,0 +1,4 @@
+#!/bin/sh
+swag init -g web.go -d internal/web && \
+  go run main.go serve --config ~/.config/otc/.otc.yaml | lolcat
+exit $?

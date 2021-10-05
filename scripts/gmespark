@@ -1,0 +1,3 @@
+#!/usr/bin/env fish
+gme >> /tmp/gme.log && printf "\$%s " (tail -n 1 /tmp/gme.log) | tr -d '\n' && cat /tmp/gme.log | spark
+exit $status
