@@ -1,3 +1,0 @@
-#!/bin/sh
-curl -s "https://finnhub.io/api/v1/quote?symbol=GME&token=c54s6maad3ifdcrduaj0" | jq '.["c"]'
-exit $?
