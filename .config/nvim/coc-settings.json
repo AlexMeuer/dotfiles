@@ -6,9 +6,5 @@
       "trace.server": "verbose",
       "filetypes": ["go"]
     }
-  },
-  "coc.source.OmniSharp.enable" : true,
-  "coc.source.OmniSharp.triggerCharacters": [
-    "."
-  ]
+  }
 }

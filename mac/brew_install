@@ -12,16 +12,6 @@ brew install nvim visual-studio-code
 
 echo "\n -=-=-=-=-=-=-=-=-=-=-=-=-=-=- \n" | lolcat
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-echo "Installing VS Code extensions" | lolcat
-while read -r line
-    do code --install-extension "${line}"
-done < "${DIR}/../vscode.extensions"
-
-echo "\n -=-=-=-=-=-=-=-=-=-=-=-=-=-=- \n" | lolcat
-
-brew install stripe/stripe-cli/stripe
-
 brew install spotify spotify-tui spotifyd
 
 brew install zoom clickup
