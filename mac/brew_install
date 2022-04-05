@@ -4,9 +4,9 @@ if ! command -v brew &> /dev/null; then
 fi
 
 
-brew install git gh wget htop tree lolcat thefuck neofetch
+brew install git gh wget htop tree lolcat thefuck neofetch shellcheck
 
-brew install kitty fish koekeishiya/formulae/skhd
+brew install kitty fish koekeishiya/formulae/skhd ranger highlight scroll-reverser
 
 brew install nvim visual-studio-code
 
@@ -14,12 +14,9 @@ echo "\n -=-=-=-=-=-=-=-=-=-=-=-=-=-=- \n" | lolcat
 
 brew install spotify spotify-tui spotifyd
 
-brew install zoom clickup
+brew install zoom brave-browser 1password raycast ubersicht slack notion
 
-brew install ubersicht
-git clone https://github.com/AlexMeuer/simple-bar.git $HOME/Library/Application\ Support/Übersicht/widgets/simple-bar
-
-brew install raycast
+git clone https://github.com/Jean-Tinland/simple-bar.git $HOME/Library/Application\ Support/Übersicht/widgets/simple-bar
 
 brew tap homebrew/cask-fonts
 brew install font-fira-code font-hack font-mononoki
