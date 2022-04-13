@@ -48,6 +48,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+set number
 set relativenumber
 
 set smarttab
@@ -83,6 +84,7 @@ let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-json', 
   \ 'coc-go',
+  \ 'coc-flutter',
   \ 'coc-snippets',
   \ 'coc-highlight'
   \ ]

@@ -1,9 +1,27 @@
 #!/usr/bin/env sh
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
-ln -s ${DIR}/mac/.yabairc ${HOME}/.yabairc
-ln -s ${DIR}/mac/.skhdrc ${HOME}/.skhdrc
-ln -s ${DIR}/.config/nvim ${HOME}/.config/nvim
-ln -s ${DIR}/.config/kitty ${HOME}/.config/kitty
+DIR="$(git rev-parse --show-toplevel)"
+
+linkIfNotExists() {
+  if [ $# -lt 1 ]; then
+    echo "developer error: cannot link without any arguments"
+    exit 1
+  fi
+  LINK_TO="${DIR}/${1}"
+  LINK_FROM="${HOME}/${2:-$1}"
+  if [ -f "${LINK_FROM}" ] || [ -d "${LINK_FROM}" ]; then
+    echo "Won't link ${LINK_FROM} because it already exists."
+    return 1
+  else
+    ln -s "${LINK_TO}" "${LINK_TO}"
+    return 0
+  fi
+}
+
+linkIfNotExists "mac/.yabairc" ".yabairc"
+linkIfNotExists "mac/.skhdrc" ".skhdrc"
+linkIfNotExists ".config/nvim"
+linkIfNotExists ".config/kitty"
+linkIfNotExists ".config/fish"
 
 brew services restart yabai
 brew services restart skhd
