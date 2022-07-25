@@ -10,4 +10,4 @@ Run `brew_install` then `make_links`. The brew installation script installs pret
 
 ### Linux
 
-My flavour of choice is Manjaro i3. As of writing this, I don't have the dotfiles to hand.
+My Void Linux dots are pretty ad-hoc atm, but not so complicated as to be unusable. Link everything into `$HOME/.config/` for the most part.

@@ -17,11 +17,5 @@ linkIfNotExists() {
   fi
 }
 
-linkIfNotExists "mac/.yabairc" ".yabairc"
-linkIfNotExists "mac/.skhdrc" ".skhdrc"
 linkIfNotExists ".config/nvim"
-linkIfNotExists ".config/kitty"
 linkIfNotExists ".config/fish"
-
-brew services restart yabai
-brew services restart skhd

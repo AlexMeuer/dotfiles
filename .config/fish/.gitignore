@@ -1,0 +1,5 @@
+!functions/fish_greeting.fish
+fish_variables
+completions/
+conf.d/
+functions/
