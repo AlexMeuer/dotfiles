@@ -32,6 +32,10 @@ super + alt + {q,r}
 super + {_,shift + }w
 	bspc node -{c,k}
 
+# rotate the split
+super + {_,control + }r
+  bspc node '@parent' -R {_,-}90
+
 # alternate between the tiled and monocle layout
 super + m
 	bspc desktop -l next
@@ -43,6 +47,9 @@ super + y
 # swap the current node and the biggest window
 super + g
 	bspc node -s biggest.window
+
+super + alt + {1,2,3,4}
+  bspc config window_gap {0, 12, 64, 128}
 
 #
 # state/flags
