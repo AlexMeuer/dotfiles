@@ -202,6 +202,9 @@ shift + alt - c : yabai -m window --toggle float;\
 # Toggle sticky window
 shift + alt - s : yabai -m window --toggle sticky
 
+# Make the window stay above others
+shift + alt + lctrl - s : yabai -m window --layer above
+
 # Equalize size of windows
 lctrl + alt - 0 : yabai -m space --balance
 
