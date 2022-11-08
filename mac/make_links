@@ -12,16 +12,20 @@ linkIfNotExists() {
     echo "Won't link ${LINK_FROM} because it already exists."
     return 1
   else
-    ln -s "${LINK_FROM}" "${LINK_TO}"
+    echo "Linking ${LINK_FROM}"
+    ln -s "${LINK_TO}" "${LINK_FROM}"
     return 0
   fi
 }
 
+linkIfNotExists ".config/fish"
+linkIfNotExists ".config/kitty"
+linkIfNotExists ".config/lvim"
+linkIfNotExists ".config/nvim"
+linkIfNotExists ".config/ranger"
+
 linkIfNotExists "mac/.yabairc" ".yabairc"
 linkIfNotExists "mac/.skhdrc" ".skhdrc"
-linkIfNotExists ".config/nvim"
-linkIfNotExists ".config/kitty"
-linkIfNotExists ".config/fish"
 
 brew services restart yabai
 brew services restart skhd

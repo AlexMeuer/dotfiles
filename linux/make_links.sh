@@ -17,5 +17,13 @@ linkIfNotExists() {
   fi
 }
 
-linkIfNotExists ".config/nvim"
+linkIfNotExists ".config/alacritty"
+linkIfNotExists ".config/bspwm"
 linkIfNotExists ".config/fish"
+linkIfNotExists ".config/lvim"
+linkIfNotExists ".config/nvim"
+linkIfNotExists ".config/polybar"
+linkIfNotExists ".config/qutebrowser"
+linkIfNotExists ".config/ranger"
+linkIfNotExists ".config/rofi"
+linkIfNotExists ".config/sxhkd"
