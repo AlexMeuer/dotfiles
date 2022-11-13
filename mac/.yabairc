@@ -49,6 +49,7 @@ yabai -m config window_border_width         2
 yabai -m config active_window_border_color  "0xE0${focused_border_color}"
 yabai -m config insert_window_border_color  "0xE0${preselect_border_color}"
 yabai -m config normal_window_border_color  "0xE0${normal_border_color}"
+yabai -m config window_border_radius        0
 
 # ====== List of rules =========================
 
@@ -57,10 +58,8 @@ yabai -m rule --add label="Brave" app="^Brave" title="^(General|(Tab|Password|We
 yabai -m rule --add label="System Preferences" app="^System Preferences$" manage=off
 yabai -m rule --add label="App Store" app="^App Store$" manage=off
 yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
-yabai -m rule --add label="KeePassXC" app="^KeePassXC$" manage=off
 yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
 yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
-yabai -m rule --add label="mpv" app="^mpv$" manage=off
 yabai -m rule --add label="The Unarchiver" app="^The Unarchiver$" manage=off
 yabai -m rule --add label="Transmission" app="^Transmission$" manage=off
 yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off

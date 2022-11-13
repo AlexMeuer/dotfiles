@@ -8,6 +8,10 @@
     }
   },
   "coc.preferences.formatOnSaveFiletypes": [
-    "dart"
+    "dart",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
   ]
 }

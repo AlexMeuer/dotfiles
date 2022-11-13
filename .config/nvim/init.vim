@@ -56,7 +56,8 @@ let g:coc_global_extensions = [
   \ 'coc-go',
   \ 'coc-flutter',
   \ 'coc-snippets',
-  \ 'coc-highlight'
+  \ 'coc-highlight',
+  \ 'coc-tsserver'
   \ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
