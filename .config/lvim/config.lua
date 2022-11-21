@@ -132,8 +132,9 @@ lvim.builtin.treesitter.highlight.enable = true
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  --   { command = "black", filetypes = { "python" } },
-  --   { command = "isort", filetypes = { "python" } },
+  { command = "goimports", filetypes = { "go" } },
+  -- { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
   {
     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "prettier",
@@ -279,6 +280,21 @@ lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
     else
       fallback()
     end
+  end
+end
+lvim.builtin.cmp.mapping["<S-Tab>"] = function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+  else
+    fallback()
+  end
+end
+lvim.builtin.cmp.mapping["<A-Tab>"] = function(fallback)
+  local copilot_keys = vim.fn["copilot#Accept"]()
+  if copilot_keys ~= "" then
+    vim.api.nvim_feedkeys(copilot_keys, "i", true)
+  else
+    fallback()
   end
 end
 
