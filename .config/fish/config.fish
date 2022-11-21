@@ -2,8 +2,6 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-# pnpm
-set -gx PNPM_HOME "/home/alex/.local/share/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
-# pnpm end
 thefuck --alias | source
+
+replay $NVM_DIR/nvm.sh
