@@ -87,6 +87,8 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
+lvim.builtin.treesitter.autotag.enable = true
+lvim.builtin.treesitter.rainbow.enable = true
 
 -- generic LSP settings
 
@@ -209,6 +211,9 @@ lvim.plugins = {
     },
     ft = { "fugitive" }
   },
+  {
+    "APZelos/blamer.nvim"
+  },
   -- {
   --   "folke/noice.nvim",
   --   config = function()
@@ -268,6 +273,8 @@ lvim.plugins = {
     "kevinhwang91/rnvimr"
   }
 }
+
+vim.g.blamer_enabled = 1
 
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
