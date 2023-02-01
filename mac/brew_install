@@ -3,46 +3,20 @@ if ! command -v brew &> /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-
-brew install git gh wget htop tree lolcat thefuck neofetch shellcheck
-
-brew install kitty fish koekeishiya/formulae/skhd ranger highlight scroll-reverser
-
-brew install nvim visual-studio-code
-
-echo "\n -=-=-=-=-=-=-=-=-=-=-=-=-=-=- \n" | lolcat
-
-brew install spotify spotify-tui spotifyd
-
-brew install zoom brave-browser 1password raycast ubersicht slack notion
-
-git clone https://github.com/Jean-Tinland/simple-bar.git $HOME/Library/Application\ Support/Übersicht/widgets/simple-bar
-
-brew tap homebrew/cask-fonts
-brew install font-fira-code font-hack font-mononoki
-
 brew tap homebrew/cask-versions
-brew install discord-canary
+brew tap homebrew/cask-fonts
+brew install \
+        git gh exa bat ranger btop fzf \
+        lolcat thefuck neofetch \
+        shellcheck \
+        nvim visual-studio-code \
+        spotify spotify-tui spotifyd \
+        zoom slack notion discord-canary \
+        brave-browser 1password raycast ubersicht \
+        font-hack
 
-echo "\n -=-=-=-=-=-=-=-=-=-=-=-=-=-=- " | lolcat
-
-if command -v go &> /dev/null; then
-    echo "\n :)  Go already installed." | lolcat
-else
-    echo "\n (!) Go not installed. Install manually."
-fi
-if command -v flutter &> /dev/null; then
-    echo "\n :)  Flutter already installed." | lolcat
-else
-    echo "\n (!) Flutter not installed. Install manually."
-fi
-
-if command -v node &> /dev/null; then
-    echo "\n :)  Node already installed." | lolcat
-else
-    echo "\n (!) Node not installed. Install with 'brew install node'."
-fi
+git clone https://github.com/Jean-Tinland/simple-bar.git "${HOME}/Library/Application Support/Übersicht/widgets/simple-bar"
 
 if ! command -v yabai &> /dev/null; then
-    echo "\n (!) Yabai installation requires partially disabling SIP.\n     Install manually: https://github.com/koekeishiya/yabai\n"
+    echo -e "\n (!) Yabai installation requires partially disabling SIP.\n     Install manually: https://github.com/koekeishiya/yabai\n"
 fi

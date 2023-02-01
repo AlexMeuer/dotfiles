@@ -271,6 +271,9 @@ lvim.plugins = {
   },
   {
     "kevinhwang91/rnvimr"
+  },
+  {
+    "easymotion/vim-easymotion"
   }
 }
 
