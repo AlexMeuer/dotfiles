@@ -22,6 +22,10 @@ linkIfNotExists ".config/fish"
 linkIfNotExists ".config/kitty"
 linkIfNotExists ".config/lvim"
 linkIfNotExists ".config/nvim"
+if linkIfNotExists ".config/astronvim"; then 
+  echo "  Linked AstroNvim User config, but it will only be loaded is XDG_CONFIG_HOME is set correctly."
+  echo "  Currently XDG_CONFIG_HOME is set to ${XDG_CONFIG_HOME:-"nothing."}"
+fi
 linkIfNotExists ".config/ranger"
 
 linkIfNotExists "mac/.yabairc" ".yabairc"

@@ -1,0 +1,33 @@
+#!/bin/sh
+# Description: Clone a GitHub repo to ~/repos/<user>/<repo>
+# Usage: clone <user>/<repo>
+# Example: clone johndoe/myrepo
+
+set -e
+
+if ! command -v gh > /dev/null; then
+    printf "gh command not found\n"
+    exit 1
+fi
+
+if [ -z "$1" ]; then
+    printf "Usage: %s <user>/<repo>\n" "${0}"
+    exit 1
+fi
+
+USER=$(echo "$1" | cut -d/ -f1)
+REPO=$(echo "$1" | cut -d/ -f2)
+
+mkdir -p "${HOME}/repos/${USER}"
+
+REPO_PATH="${HOME}/repos/${USER}/${REPO}"
+
+if [ -d "${HOME}/repos/${USER}/${REPO}" ]; then
+    printf "Repo already exists\n"
+    exit 1
+fi
+
+
+gh repo clone "${1}" "${REPO_PATH}"
+
+printf "Repo cloned to %s\n" "${REPO_PATH}"
