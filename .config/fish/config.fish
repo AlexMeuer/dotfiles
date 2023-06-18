@@ -4,4 +4,4 @@ end
 
 thefuck --alias | source
 
-replay $NVM_DIR/nvm.sh
+set -x GPG_TTY (tty)

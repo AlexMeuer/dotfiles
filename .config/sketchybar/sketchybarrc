@@ -1,0 +1,57 @@
+#!/usr/bin/env sh
+source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+ITEM_DIR="$HOME/.config/sketchybar/items" 
+
+DATA_ICON_PADDING_RIGHT=3
+DATA_BACKGROUND_PADDING_LEFT=7
+DATA_ICON_PADDING_LEFT=3
+DATA_LABEL_PADDING_RIGHT=5
+BORDER_SELECTED_WIDTH=2
+
+HELPER=git.felix.helper
+killall helper
+cd $HOME/.config/sketchybar/helper && make
+$HOME/.config/sketchybar/helper/helper $HELPER > /dev/null 2>&1 &
+
+FONT="Hack Nerd Font"
+# FONT_ICON="Material Design Icons:Bold:14.0"
+FONT_ICON="sketchybar-app-font:Regular:14.0"
+PADDINGS=1
+
+sketchybar --bar     height=28                        \
+                     color=$BAR_BACKGROUND            \
+                     shadow=off                       \
+                     position=top                     \
+                     sticky=on                        \
+                     padding_right=0                  \
+                     padding_left=0                   \
+                     margin=-8                        \
+                     blur_radius=0                    \
+                     notch_width=0                    \
+           --default                                  \
+                     icon.font="$FONT_ICON"           \
+                     label.font="$FONT:Bold:12.0"     \
+                     y_offset=0                       \
+                     background.height=21
+
+
+# Left
+source "$ITEM_DIR/spaces.sh"
+
+# Right
+source "$ITEM_DIR/data_spacer.sh"
+source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/wattage.sh"
+source "$ITEM_DIR/spotify.sh"
+source "$ITEM_DIR/brackets.sh"
+
+sketchybar --update
+
+echo "sketchybar configuation loaded.."
