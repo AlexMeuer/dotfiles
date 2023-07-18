@@ -29,6 +29,7 @@ fi
 linkIfNotExists ".config/helix"
 linkIfNotExists ".config/ranger"
 linkIfNotExists ".config/sketchybar"
+linkIfNotExists ".config/nap"
 
 linkIfNotExists "mac/.yabairc" ".yabairc"
 linkIfNotExists "mac/.skhdrc" ".skhdrc"

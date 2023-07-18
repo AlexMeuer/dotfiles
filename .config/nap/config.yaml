@@ -1,0 +1,12 @@
+# Colors (Gruvbox)
+background: "#282828"
+foreground: "#ebdbb2"
+primary_color: "#8ec07c"
+primary_color_subdued: "#689d6a"
+green: "#98971a"
+bright_green: "#b8bb26"
+bright_red: "#fb4934"
+red: "#cc241d"
+black: "#1d2021"
+gray: "#928374"
+white: "#fbf1c7"

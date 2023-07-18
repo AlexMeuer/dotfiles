@@ -11,9 +11,9 @@ return {
     show_changelog = true, -- show the changelog after performing an update
     auto_quit = true, -- automatically quit the current session after a successful update
     -- remotes = { -- easily add new remotes to track
-      --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
-      --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
-      --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
+    --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
+    --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
+    --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
     -- },
   },
   -- Set colorscheme to use
@@ -49,7 +49,7 @@ return {
     },
     -- enable servers that you already have installed without mason
     -- servers = {
-      -- "pyright"
+    -- "pyright"
     -- },
   },
   -- Configure require("lazy").setup() options
@@ -59,6 +59,21 @@ return {
       rtp = {
         -- customize default disabled vim plugins
         disabled_plugins = { "tohtml", "gzip", "matchit", "zipPlugin", "netrwPlugin", "tarPlugin" },
+      },
+    },
+    config = {
+      rust_analyzer = {
+        settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              command = "clippy",
+            },
+            cargo = {
+              extraEnv = { CARGO_PROFILE_RUST_ANALYZER_INHERITS = "dev" },
+              extraArgs = { "--profile", "rust-analyzer" },
+            },
+          },
+        },
       },
     },
   },

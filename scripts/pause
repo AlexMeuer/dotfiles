@@ -1,0 +1,2 @@
+#!/bin/sh
+exec read -r -p "Press enter to continue..."

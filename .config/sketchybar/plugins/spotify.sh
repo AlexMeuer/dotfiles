@@ -118,10 +118,10 @@ remove_hover() {
 case "$SENDER" in
   "mouse.clicked") mouse_clicked
   ;;
-  "mouse.entered") add_hover
-  ;;
-  "mouse.exited") remove_hover
-  ;;
+  # "mouse.entered") add_hover
+  # ;;
+  # "mouse.exited") remove_hover
+  # ;;
   "mouse.exited.global") popup off
   ;;
   *) update

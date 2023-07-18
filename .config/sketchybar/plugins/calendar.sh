@@ -23,10 +23,10 @@ mouse_clicked() {
 case "$SENDER" in
   "mouse.clicked") mouse_clicked
   ;;
-  "mouse.entered") add_hover
-  ;;
-  "mouse.exited") remove_hover
-  ;;
+  # "mouse.entered") add_hover
+  # ;;
+  # "mouse.exited") remove_hover
+  # ;;
   *) update
   ;;
 esac

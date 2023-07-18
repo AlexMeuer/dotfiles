@@ -9,14 +9,14 @@ remove_hover() {
 }
 
 mouse_clicked() {
-    open -a alacritty --args -e btop
+    open -a kitty --args -e btop
 }
 
 case "$SENDER" in
   "mouse.clicked") mouse_clicked
   ;;
-  "mouse.entered") add_hover
-  ;;
-  "mouse.exited") remove_hover
-  ;;
+  # "mouse.entered") add_hover
+  # ;;
+  # "mouse.exited") remove_hover
+  # ;;
 esac
