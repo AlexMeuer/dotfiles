@@ -12,18 +12,19 @@ linkIfNotExists() {
     echo "Won't link ${LINK_FROM} because it already exists."
     return 1
   else
-    ln -s "${LINK_FROM}" "${LINK_TO}"
+    ln -s "${LINK_TO}" "${LINK_FROM}"
     return 0
   fi
 }
 
 linkIfNotExists ".config/alacritty"
+linkIfNotExists ".config/kitty"
 linkIfNotExists ".config/bspwm"
 linkIfNotExists ".config/fish"
 linkIfNotExists ".config/lvim"
 linkIfNotExists ".config/nvim"
 linkIfNotExists ".config/astronvim"
-linkIfNotExists ".config/helix"
+linkIfNotExists ".config/river"
 linkIfNotExists ".config/polybar"
 linkIfNotExists ".config/qutebrowser"
 linkIfNotExists ".config/ranger"
