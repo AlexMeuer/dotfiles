@@ -7,7 +7,6 @@ return {
   { "rlane/pounce.nvim", keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
   {
     "folke/todo-comments.nvim",
-    event = "BufEnter",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
   { "gennaro-tedesco/nvim-peekup", event = "VeryLazy" },
@@ -41,9 +40,8 @@ return {
       require("windows").setup()
     end,
     keys = {
-      { "<leader>wt", "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle autowidth" },
-      { "<leader>ww", "<cmd>WindowsMaximize<cr>", desc = "Maximize current window" },
-      { "<C-w>z", "<cmd>WindowsMaximize<cr>" },
+      { "<C-w>t", "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle autowidth" },
+      { "<C-w>z", "<cmd>WindowsMaximize<cr>", desc = "Maximize" },
     },
   },
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },

@@ -1,2 +1,0 @@
-#!/bin/sh
-exec flutter run --web-port 3001

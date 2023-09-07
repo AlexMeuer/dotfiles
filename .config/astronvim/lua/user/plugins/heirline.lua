@@ -59,14 +59,14 @@ return {
           provider = status.provider.tabnr(),
           hl = function(self) return status.hl.get_attributes(status.heirline.tab_type(self, "tab"), true) end,
         },
-        { -- close button for current tab
-          provider = status.provider.close_button { kind = "TabClose", padding = { left = 1, right = 1 } },
-          hl = status.hl.get_attributes("tab_close", true),
-          on_click = {
-            callback = function() require("astronvim.utils.buffer").close_tab() end,
-            name = "heirline_tabline_close_tab_callback",
-          },
-        },
+        -- { -- close button for current tab
+        --   provider = status.provider.close_button { kind = "TabClose", padding = { left = 1, right = 1 } },
+        --   hl = status.hl.get_attributes("tab_close", true),
+        --   on_click = {
+        --     callback = function() require("astronvim.utils.buffer").close_tab() end,
+        --     name = "heirline_tabline_close_tab_callback",
+        --   },
+        -- },
       },
     }
 
