@@ -1,0 +1,6 @@
+#!/bin/sh
+# qs - quick save
+# Commits all changes in the current git repository with a message of
+# "quicksave" or the first argument passed to the script.
+# Bypasses the pre-commit hook.
+exec git commit --message "${1:-quicksave}" --all --no-verify
