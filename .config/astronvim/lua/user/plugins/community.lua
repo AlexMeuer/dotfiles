@@ -5,6 +5,11 @@ return {
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
   { import = "astrocommunity.completion.copilot-lua-cmp" },
+  {
+    import = "astrocommunity.diagnostics.lsp_lines-nvim",
+    keys = { "<leader>dl", 'require("lsp_lines").toggle()', desc = "Toggle lsp_lines" },
+  },
+
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
 
@@ -15,7 +20,7 @@ return {
   { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.typescript" },
-  -- { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.python" },
 
   { import = "astrocommunity.pack.docker" },
 
