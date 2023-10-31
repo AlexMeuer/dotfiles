@@ -1,0 +1,37 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Alex Meuer
+	email = github@alexmeuer.com
+	signingkey = A6E3228B199A3EF7
+
+[init]
+  defaultBranch = main
+
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+#  side-by-side = true
+  syntax-theme = gruvbox-dark
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+[pull]
+	rebase = true
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[fetch]
+	prune = true

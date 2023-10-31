@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 DIR="$(git rev-parse --show-toplevel)"
 
 linkIfNotExists() {
@@ -35,7 +35,9 @@ linkIfNotExists "mac/.yabairc" ".yabairc"
 linkIfNotExists "mac/.skhdrc" ".skhdrc"
 
 yabai --stop-service
+sleep 1
 yabai --start-service
 skhd --stop-service
+sleep 1
 skhd --start-service
 brew services restart sketchybar
