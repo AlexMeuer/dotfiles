@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+function div() {
+  echo " -~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-" | lolcat
+}
+div
+echo "    Stopping Yabai..." | lolcat
+yabai --stop-service
+div
+read -n 1 -p "  Yabai has been temporarily stopped. Press any key to resume."
+echo ""
+div
+echo "    Starting Yabai..." | lolcat
+yabai --start-service
+div
