@@ -4,6 +4,18 @@
 -- lower level configuration and more robust one. (which-key will
 -- automatically pick-up stored data by this setting.)
 local utils = require "astronvim.utils"
+local Job = require "plenary.job"
+local notify = require "notify"
+local runSpotify = function(args, title)
+  Job
+    :new({
+      command = "spt",
+      args = args,
+      on_exit = function(j, return_val) notify(j:result(), return_val == 0 and "info" or "error", { title = title }) end,
+    })
+    :start()
+end
+
 return {
   -- first key is the mode
   n = {
@@ -32,20 +44,26 @@ return {
       desc = "ToggleTerm spotify",
     },
     ["<leader>mt"] = {
-      function() vim.fn.jobstart "spt playback --toggle" end,
+      function() runSpotify({ "playback", "--toggle" }, "Playback Toggled") end,
       desc = "Toggle play/pause",
     },
     ["<leader>mn"] = {
-      function() vim.fn.jobstart "spt playback --next" end,
+      function() runSpotify({ "playback", "--next" }, "Next Track") end,
       desc = "Next song",
     },
     ["<leader>mp"] = {
-      function() vim.fn.jobstart "spt playback --previous" end,
+
+      function() runSpotify({ "playback", "--previous" }, "Previous Track") end,
       desc = "Previous song",
     },
     ["<leader>ms"] = {
-      function() vim.fn.jobstart "spt playback --shuffle" end,
+
+      function() runSpotify({ "playback", "--shuffle" }, "Shuffle") end,
       desc = "Toggle shufle",
+    },
+    ["<leader>mi"] = {
+      function() runSpotify({ "playback" }, "Info") end,
+      desc = "Info (Now Playing)",
     },
   },
   t = {
