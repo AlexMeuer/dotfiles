@@ -2,7 +2,7 @@
 [user]
 	name = Alex Meuer
 	email = github@alexmeuer.com
-	signingkey = A6E3228B199A3EF7
+	signingkey = 54115713E8D9CA7C
 
 [init]
   defaultBranch = main
@@ -24,14 +24,22 @@
 
 [diff]
   colorMoved = default
+
 [pull]
 	rebase = true
+
 [commit]
 	gpgsign = true
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [fetch]
 	prune = true
+
+# I keep my org-specific config in a separate file.
+[includeIf "gitdir:~/repos/everworks/"]
+	path = ~/repos/everworks/.gitconfig

@@ -8,7 +8,6 @@ fi
 
 brew tap homebrew/cask-versions
 brew tap homebrew/cask-fonts
-brew update
 
 # Read the list of packages from brew_leaves
 IFS=$'\n' read -d '' -r -a LEAVES <brew_leaves

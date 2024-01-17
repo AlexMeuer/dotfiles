@@ -12,12 +12,12 @@ return {
   { "gennaro-tedesco/nvim-peekup", event = "VeryLazy" },
   {
     "folke/twilight.nvim",
-    keys = { { "<leader>ut", "<cmd>Twilight<cr>", desc = "Twilight (code dimming)" } },
+    keys = { { "<leader>uz", "<cmd>Twilight<cr>", desc = "Twilight (code dimming)" } },
   },
   {
     "folke/zen-mode.nvim",
     keys = {
-      { "<leader>uz", "<cmd>ZenMode<cr>", desc = "Zen Mode" },
+      { "<leader>uZ", "<cmd>ZenMode<cr>", desc = "Zen Mode" },
     },
   },
   {
@@ -60,6 +60,7 @@ return {
     end,
   },
   {
+    -- Need to run ":MasonInstall sonarlint-language-server" to install the server for this.
     "https://gitlab.com/schrieveslaach/sonarlint.nvim",
     event = { "BufEnter *.ts", "BufEnter *.js", "BufEnter *.tsx", "BufEnter *.py" },
     config = function()
@@ -78,8 +79,42 @@ return {
         filetypes = {
           "python",
           "javascript",
+          "typescript",
+          "typescriptreact",
         },
       }
     end,
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    event = {
+      "BufReadPre " .. vim.fn.expand "~" .. "/repos/alexmeuer/notes/**.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "/repos/alexmeuer/notes/**.m",
+    },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- Optional.
+    },
+    opts = {
+      daily_notes = {
+        folder = "Dailies/",
+        template = "_templates/Daily template.md",
+      },
+      completion = {
+        nvim_cmp = true,
+        min_chars = 2,
+      },
+      mappings = {
+        ["gf"] = {
+          action = function() return require("obsidian").util.gf_passthrough() end,
+          opts = { noremap = false, expr = true, buffer = true },
+        },
+      },
+      templates = {
+        subdir = "_templates",
+      },
+    },
   },
 }
