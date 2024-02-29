@@ -37,7 +37,7 @@ return {
       function() utils.toggle_term_cmd "spt" end,
       desc = "ToggleTerm spotify",
     },
-    ["<leader>m"] = { desc = "Music" },
+    ["<leader>m"] = { desc = " Music" },
     ["<leader>mo"] = {
       -- Assumes that toggle term is available.
       function() utils.toggle_term_cmd "spt" end,
@@ -64,6 +64,10 @@ return {
     ["<leader>mi"] = {
       function() runSpotify({ "playback" }, "Info") end,
       desc = "Info (Now Playing)",
+    },
+    ["<leader>uo"] = {
+      "<cmd>AerialToggle<cr>",
+      desc = "Toggle Outline",
     },
   },
   t = {

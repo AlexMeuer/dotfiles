@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	printf "\e[36mGet the github url for the selected file\n"
+	printf "\e[37mAssumes the file is in the main branch.\n"
+	printf "Works from any subdirectory of the repo.\n"
+	printf "\e[92mUsage:  \e[0m \e[93m%s <file_path>\e[0m\n" "$(basename "${0}")"
+	exit 1
+fi
+
+echo "$(gh repo view --json url --jq .url)/blob/main/$(git rev-parse --show-prefix)${1}"

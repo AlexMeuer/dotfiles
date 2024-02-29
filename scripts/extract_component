@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Assumes that the component file has the prop types above the functional component.
+# The prop types may or may not have a JSDoc comment block above them.
+# Assumes that the functional component is exported.
+# Will NOT work with default exports.
+
+if [ $# -eq 0 ]; then
+	printf "Attempts to extract prop types and component name from a component file.\n"
+	printf "\e[92mUsage:  \e[0m \e[93m%s <file_path>\e[0m\n" "$(basename "${0}")"
+	printf "\e[92mExample:\e[0m \e[93m%s src/components/MyComponent.tsx | tee /dev/tty | pbcopy\e[0m\n" "$(basename "${0}")"
+	exit 1
+fi
+
+FILE_PATH="${1}"
+
+# Extract lines from the first occurrence of `/**` or `export type *Props`
+START_LINE=$(grep -nE '\/\*\*|type [A-Za-z]+Props' "${FILE_PATH}" | head -n 1 | cut -d ':' -f 1)
+
+# Extract the line with the function name
+FUNC_NAME_LINE=$(grep -nE 'export const [A-Za-z]+: React.V?FC<[^>]+>\s*=\s*\(' "${FILE_PATH}" | head -n 1 | cut -d ':' -f 1)
+
+# Print the extracted lines
+sed -n "${START_LINE},${FUNC_NAME_LINE}p" "${FILE_PATH}"

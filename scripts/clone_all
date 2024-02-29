@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Check if the organization name is provided as the first positional parameter
+if [ -z "$1" ]; then
+	echo "Please provide the organization name as the first positional parameter."
+	exit 1
+fi
+
+ORG_NAME="$1"
+SUFFIX_REGEX=${2:-""} # Use an empty string if SUFFIX_REGEX is not provided
+
+# Get a list of REPOSitories in the organization
+REPOS=$(gh repo list "$ORG_NAME" --json=name -q '.[].name')
+
+# Loop through the REPOSitories and download only those that match the suffix regex
+for REPO in $REPOS; do
+	if [[ ! $REPO =~ $SUFFIX_REGEX ]]; then
+		clone "$ORG_NAME"/"$REPO" || echo "Failed to clone $REPO"
+	fi
+done

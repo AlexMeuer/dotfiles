@@ -1,15 +1,21 @@
 return {
+  -- Colorscheme(s)
+  { "sainnhe/gruvbox-material" },
+  { "sainnhe/everforest" },
+
+  -- Must-have: fuzzy jumper
+  { "rlane/pounce.nvim",       keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
+
+  -- Navigate aruound kitty and nvim with same pane bindings
+  -- Additional kitty setup required. https://github.com/knubie/vim-kitty-navigator
   {
-    "sainnhe/gruvbox-material",
-    -- commit = "66f66f64788f66c8101aa35344dd005143356b6b",
+    "knubie/vim-kitty-navigator",
+    event = "VeryLazy",
   },
-  -- { "sainnhe/everforest" },
-  { "rlane/pounce.nvim",           keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
+
+  -- See and select registers
   { "gennaro-tedesco/nvim-peekup", event = "VeryLazy" },
+
   {
     "folke/twilight.nvim",
     keys = { { "<leader>uz", "<cmd>Twilight<cr>", desc = "Twilight (code dimming)" } },
@@ -44,21 +50,23 @@ return {
       { "<C-w>z", "<cmd>WindowsMaximize<cr>",        desc = "Maximize" },
     },
   },
+
+  -- Markdown previewer
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
-  {
-    "pwntester/octo.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    event = "BufRead",
-    config = function()
-      require("octo").setup {
-        enable_builtin = true,
-      }
-    end,
-  },
+  -- {
+  --   "pwntester/octo.nvim",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   event = "BufRead",
+  --   config = function()
+  --     require("octo").setup {
+  --       enable_builtin = true,
+  --     }
+  --   end,
+  -- },
   {
     -- Need to run ":MasonInstall sonarlint-language-server" to install the server for this.
     "https://gitlab.com/schrieveslaach/sonarlint.nvim",
@@ -87,10 +95,7 @@ return {
   },
   {
     "epwalsh/obsidian.nvim",
-    event = {
-      "BufReadPre " .. vim.fn.expand "~" .. "/repos/alexmeuer/notes/**.md",
-      "BufNewFile " .. vim.fn.expand "~" .. "/repos/alexmeuer/notes/**.m",
-    },
+    ft = "markdown",
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
@@ -98,6 +103,12 @@ return {
       -- Optional.
     },
     opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/repos/alexmeuer/notes",
+        },
+      },
       daily_notes = {
         folder = "Dailies/",
         template = "_templates/Daily template.md",
