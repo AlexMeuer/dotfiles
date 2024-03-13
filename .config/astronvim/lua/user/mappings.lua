@@ -37,6 +37,11 @@ return {
       function() utils.toggle_term_cmd "spt" end,
       desc = "ToggleTerm spotify",
     },
+    ["<leader>tn"] = {
+      -- Assumes that toggle term is available.
+      function() utils.toggle_term_cmd "nap" end,
+      desc = "ToggleTerm Nap",
+    },
     ["<leader>m"] = { desc = " Music" },
     ["<leader>mo"] = {
       -- Assumes that toggle term is available.
@@ -59,7 +64,7 @@ return {
     ["<leader>ms"] = {
 
       function() runSpotify({ "playback", "--shuffle" }, "Shuffle") end,
-      desc = "Toggle shufle",
+      desc = "Toggle shuffle",
     },
     ["<leader>mi"] = {
       function() runSpotify({ "playback" }, "Info") end,
