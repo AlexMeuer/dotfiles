@@ -27,6 +27,7 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.dart" },
+  { import = "astrocommunity.pack.nix" },
 
   { import = "astrocommunity.pack.docker" },
 

@@ -20,12 +20,7 @@ linkIfNotExists() {
 
 linkIfNotExists ".config/fish"
 linkIfNotExists ".config/kitty"
-linkIfNotExists ".config/lvim"
 linkIfNotExists ".config/nvim"
-if linkIfNotExists ".config/astronvim"; then
-	echo "  Linked AstroNvim User config, but it will only be loaded if XDG_CONFIG_HOME is set correctly."
-	echo "  Currently XDG_CONFIG_HOME is set to ${XDG_CONFIG_HOME:-"nothing."}"
-fi
 linkIfNotExists ".config/ranger"
 linkIfNotExists ".config/sketchybar"
 linkIfNotExists ".config/nap"
@@ -33,10 +28,6 @@ linkIfNotExists ".config/nap"
 linkIfNotExists "mac/.yabairc" ".yabairc"
 linkIfNotExists "mac/.skhdrc" ".skhdrc"
 
-yabai --stop-service
-sleep 1
-yabai --start-service
-skhd --stop-service
-sleep 1
-skhd --start-service
+yabai --restart-service
+skhd --restart-service
 brew services restart sketchybar
