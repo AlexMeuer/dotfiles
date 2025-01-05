@@ -53,6 +53,18 @@ return {
 
   -- Markdown previewer
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
   -- {
   --   "pwntester/octo.nvim",
   --   requires = {
@@ -67,65 +79,65 @@ return {
   --     }
   --   end,
   -- },
-  {
-    -- Need to run ":MasonInstall sonarlint-language-server" to install the server for this.
-    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-    event = { "BufEnter *.ts", "BufEnter *.js", "BufEnter *.tsx", "BufEnter *.py" },
-    config = function()
-      require("sonarlint").setup {
-        server = {
-          cmd = {
-            "sonarlint-language-server",
-            -- Ensure that sonarlint-language-server uses stdio channel
-            "-stdio",
-            "-analyzers",
-            -- paths to the analyzers you need, using those for python and java in this example
-            vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarpython.jar",
-            vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarjs.jar",
-          },
-        },
-        filetypes = {
-          "python",
-          "javascript",
-          "typescript",
-          "typescriptreact",
-        },
-      }
-    end,
-  },
-  {
-    "epwalsh/obsidian.nvim",
-    ft = "markdown",
-    dependencies = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
-
-      -- Optional.
-    },
-    opts = {
-      workspaces = {
-        {
-          name = "personal",
-          path = "~/repos/alexmeuer/notes",
-        },
-      },
-      daily_notes = {
-        folder = "Dailies/",
-        template = "_templates/Daily template.md",
-      },
-      completion = {
-        nvim_cmp = true,
-        min_chars = 2,
-      },
-      mappings = {
-        ["gf"] = {
-          action = function() return require("obsidian").util.gf_passthrough() end,
-          opts = { noremap = false, expr = true, buffer = true },
-        },
-      },
-      templates = {
-        subdir = "_templates",
-      },
-    },
-  },
+  -- {
+  --   -- Need to run ":MasonInstall sonarlint-language-server" to install the server for this.
+  --   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+  --   event = { "BufEnter *.ts", "BufEnter *.js", "BufEnter *.tsx", "BufEnter *.py" },
+  --   config = function()
+  --     require("sonarlint").setup {
+  --       server = {
+  --         cmd = {
+  --           "sonarlint-language-server",
+  --           -- Ensure that sonarlint-language-server uses stdio channel
+  --           "-stdio",
+  --           "-analyzers",
+  --           -- paths to the analyzers you need, using those for python and java in this example
+  --           vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarpython.jar",
+  --           vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarjs.jar",
+  --         },
+  --       },
+  --       filetypes = {
+  --         "python",
+  --         "javascript",
+  --         "typescript",
+  --         "typescriptreact",
+  --       },
+  --     }
+  --   end,
+  -- },
+  -- {
+  --   "epwalsh/obsidian.nvim",
+  --   ft = "markdown",
+  --   dependencies = {
+  --     -- Required.
+  --     "nvim-lua/plenary.nvim",
+  --
+  --     -- Optional.
+  --   },
+  --   opts = {
+  --     workspaces = {
+  --       {
+  --         name = "personal",
+  --         path = "~/repos/alexmeuer/notes",
+  --       },
+  --     },
+  --     daily_notes = {
+  --       folder = "Dailies/",
+  --       template = "_templates/Daily template.md",
+  --     },
+  --     completion = {
+  --       nvim_cmp = true,
+  --       min_chars = 2,
+  --     },
+  --     mappings = {
+  --       ["gf"] = {
+  --         action = function() return require("obsidian").util.gf_passthrough() end,
+  --         opts = { noremap = false, expr = true, buffer = true },
+  --       },
+  --     },
+  --     templates = {
+  --       subdir = "_templates",
+  --     },
+  --   },
+  -- },
 }
