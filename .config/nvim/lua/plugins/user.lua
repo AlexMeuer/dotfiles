@@ -4,7 +4,7 @@ return {
   { "sainnhe/everforest" },
 
   -- Must-have: fuzzy jumper
-  { "rlane/pounce.nvim",       keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
+  { "rlane/pounce.nvim", keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
 
   -- Navigate aruound kitty and nvim with same pane bindings
   -- Additional kitty setup required. https://github.com/knubie/vim-kitty-navigator
@@ -18,7 +18,7 @@ return {
 
   {
     "folke/twilight.nvim",
-    keys = { { "<leader>uz", "<cmd>Twilight<cr>", desc = "Twilight (code dimming)" } },
+    keys = { { "<leader>ux", "<cmd>Twilight<cr>", desc = "Twilight (code dimming)" } },
   },
   {
     "folke/zen-mode.nvim",
@@ -47,7 +47,7 @@ return {
     end,
     keys = {
       { "<C-w>t", "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle autowidth" },
-      { "<C-w>z", "<cmd>WindowsMaximize<cr>",        desc = "Maximize" },
+      { "<C-w>z", "<cmd>WindowsMaximize<cr>", desc = "Maximize" },
     },
   },
 
@@ -65,79 +65,30 @@ return {
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
-  -- {
-  --   "pwntester/octo.nvim",
-  --   requires = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --     "nvim-tree/nvim-web-devicons",
-  --   },
-  --   event = "BufRead",
-  --   config = function()
-  --     require("octo").setup {
-  --       enable_builtin = true,
-  --     }
-  --   end,
-  -- },
-  -- {
-  --   -- Need to run ":MasonInstall sonarlint-language-server" to install the server for this.
-  --   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-  --   event = { "BufEnter *.ts", "BufEnter *.js", "BufEnter *.tsx", "BufEnter *.py" },
-  --   config = function()
-  --     require("sonarlint").setup {
-  --       server = {
-  --         cmd = {
-  --           "sonarlint-language-server",
-  --           -- Ensure that sonarlint-language-server uses stdio channel
-  --           "-stdio",
-  --           "-analyzers",
-  --           -- paths to the analyzers you need, using those for python and java in this example
-  --           vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarpython.jar",
-  --           vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarjs.jar",
-  --         },
-  --       },
-  --       filetypes = {
-  --         "python",
-  --         "javascript",
-  --         "typescript",
-  --         "typescriptreact",
-  --       },
-  --     }
-  --   end,
-  -- },
-  -- {
-  --   "epwalsh/obsidian.nvim",
-  --   ft = "markdown",
-  --   dependencies = {
-  --     -- Required.
-  --     "nvim-lua/plenary.nvim",
-  --
-  --     -- Optional.
-  --   },
-  --   opts = {
-  --     workspaces = {
-  --       {
-  --         name = "personal",
-  --         path = "~/repos/alexmeuer/notes",
-  --       },
-  --     },
-  --     daily_notes = {
-  --       folder = "Dailies/",
-  --       template = "_templates/Daily template.md",
-  --     },
-  --     completion = {
-  --       nvim_cmp = true,
-  --       min_chars = 2,
-  --     },
-  --     mappings = {
-  --       ["gf"] = {
-  --         action = function() return require("obsidian").util.gf_passthrough() end,
-  --         opts = { noremap = false, expr = true, buffer = true },
-  --       },
-  --     },
-  --     templates = {
-  --       subdir = "_templates",
-  --     },
-  --   },
-  -- },
+  {
+    -- Need to run ":MasonInstall sonarlint-language-server" to install the server for this.
+    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+    event = { "BufEnter *.ts", "BufEnter *.js", "BufEnter *.tsx", "BufEnter *.py" },
+    config = function()
+      require("sonarlint").setup {
+        server = {
+          cmd = {
+            "sonarlint-language-server",
+            -- Ensure that sonarlint-language-server uses stdio channel
+            "-stdio",
+            "-analyzers",
+            -- paths to the analyzers you need, using those for python and java in this example
+            vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarpython.jar",
+            vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarjs.jar",
+          },
+        },
+        filetypes = {
+          "python",
+          "javascript",
+          "typescript",
+          "typescriptreact",
+        },
+      }
+    end,
+  },
 }

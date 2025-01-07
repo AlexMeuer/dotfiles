@@ -107,7 +107,7 @@
 
 # open terminal, blazingly fast compared to iTerm/Hyper
 cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
-cmd + alt - return : open /Applications/Firefox\ Developer \Edition.app
+cmd + alt - return : open /Applications/Firefox.app
 
 # Navigation
 alt - h : yabai -m window --focus west

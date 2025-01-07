@@ -1,0 +1,60 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+RECIPE_SLUG=$1
+if [ -z "${RECIPE_SLUG}" ]; then
+  read -p "Enter recipe slug: " RECIPE_SLUG
+fi
+
+URL_BASE="https://www.mob.co.uk/_next/data/bAaEbjdFPifIrHK6HIk0P/recipes/"
+
+curl "$URL_BASE$RECIPE_SLUG.json" --compressed -H 'Accept: */*' -H 'Accept-Language: en-GB,en;q=0.5' -H 'Accept-Encoding: gzip, deflate' -H 'purpose: prefetch' -H 'x-nextjs-data: 1' -H 'DNT: 1' -H 'Connection: keep-alive' -H 'Priority: u=4' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' | jq '
+  # Extract basic recipe details
+  .pageProps.recipe as $recipe |
+  
+  {
+    title: $recipe.title,
+    summary: $recipe.summary,
+    time: $recipe.time,
+    servingSize: $recipe.servingSize,
+    
+    # Extract ingredients with labels and quantities
+    ingredients: [
+      $recipe.recipeIngredients[] | {label, quantity}
+    ],
+    
+    # Extract step-by-step method descriptions (stripping HTML tags)
+    method: [
+      $recipe.method[] | .description | gsub("<[^>]*>"; "")
+    ],
+    
+    # Extract dietary requirements
+    dietaryRequirements: [
+      $recipe.dietaryRequirements[] | .title
+    ],
+    
+    # Extract cuisine types
+    cuisine: [
+      $recipe.cuisines[] | .title
+    ],
+    
+    # Extract complexity level
+    complexity: [
+      $recipe.complexity[] | .title
+    ],
+    
+    # Extract meal types (e.g., lunch, dinner)
+    meals: [
+      $recipe.meals[] | .title
+    ],
+    
+    # Extract occasion categories
+    occasions: [
+      $recipe.occasions[] | .title
+    ],
+    
+    # Extract image URL for the recipe
+    imageUrl: $recipe.image[0].url
+  }
+' >"${HOME}/Downloads/mob/${RECIPE_SLUG}.json"
