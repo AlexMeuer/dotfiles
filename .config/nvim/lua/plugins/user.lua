@@ -53,42 +53,89 @@ return {
 
   -- Markdown previewer
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-    },
-    build = "make tiktoken", -- Only on MacOS or Linux
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      -- See Configuration section for options
+      -- add any opts here
+      -- for example
+      provider = "copilot", -- or "openai" etc
+      -- copilot = {
+      --   disabled_tools = {
+      --     "list_files",
+      --     "search_files",
+      --     "read_file",
+      --     "create_file",
+      --     "rename_file",
+      --     "delete_file",
+      --     "create_dir",
+      --     "rename_dir",
+      --     "delete_dir",
+      --     "bash",
+      --   },
+      -- },
+      -- openai = {
+      --   endpoint = "https://api.openai.com/v1",
+      --   model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+      --   timeout = 30000, -- timeout in milliseconds
+      --   temperature = 0, -- adjust if needed
+      --   max_tokens = 4096,
+      --   -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
+      -- },
     },
-    -- See Commands section for default commands if you want to lazy load on them
-  },
-  {
-    -- Need to run ":MasonInstall sonarlint-language-server" to install the server for this.
-    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-    event = { "BufEnter *.ts", "BufEnter *.js", "BufEnter *.tsx", "BufEnter *.py" },
-    config = function()
-      require("sonarlint").setup {
-        server = {
-          cmd = {
-            "sonarlint-language-server",
-            -- Ensure that sonarlint-language-server uses stdio channel
-            "-stdio",
-            "-analyzers",
-            -- paths to the analyzers you need, using those for python and java in this example
-            vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarpython.jar",
-            vim.fn.expand "$MASON/share/sonarlint-analyzers/sonarjs.jar",
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
           },
         },
-        filetypes = {
-          "python",
-          "javascript",
-          "typescript",
-          "typescriptreact",
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
         },
-      }
-    end,
+        ft = { "markdown", "Avante" },
+      },
+      {
+        "ravitemer/mcphub.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+        },
+        -- uncomment the following line to load hub lazily
+        --cmd = "MCPHub",  -- lazy load
+        build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+        -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
+        -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
+        config = function() require("mcphub").setup() end,
+      },
+    },
   },
 }

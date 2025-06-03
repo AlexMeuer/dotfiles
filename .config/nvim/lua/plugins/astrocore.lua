@@ -125,6 +125,7 @@ return {
           "<cmd>AerialToggle<cr>",
           desc = "Toggle Outline",
         },
+        ["<leader>a"] = { desc = "Avante" },
       },
       t = {
         -- setting a mapping to false will disable it

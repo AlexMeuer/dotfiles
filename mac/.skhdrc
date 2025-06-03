@@ -105,9 +105,9 @@
 #    "qutebrowser"
 # ]
 
-# open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
-cmd + alt - return : open /Applications/Firefox.app
+# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+# cmd + alt - return : open /Applications/Firefox.app
+cmd + alt - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
 # Navigation
 alt - h : yabai -m window --focus west
@@ -161,6 +161,16 @@ fn - 7 : yabai -m space --focus 7
 fn - 8 : yabai -m space --focus 8
 fn - 9 : yabai -m space --focus 9
 fn - 0 : yabai -m space --focus 10
+# f1 : yabai -m space --focus 1
+# f2 : yabai -m space --focus 2
+# f3 : yabai -m space --focus 3
+# f4 : yabai -m space --focus 4
+# f5 : yabai -m space --focus 5
+# f6 : yabai -m space --focus 6
+# f7 : yabai -m space --focus 7
+# f8 : yabai -m space --focus 8
+# f9 : yabai -m space --focus 9
+# f10 : yabai -m space --focus 10
 
 # Resize windows
 lctrl + alt - h : \

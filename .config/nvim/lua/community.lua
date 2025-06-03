@@ -9,12 +9,10 @@ return {
 
   { import = "astrocommunity.completion.copilot-lua-cmp" },
   -- { import = "astrocommunity.editing-support.chatgpt-nvim" },
-  {
-    import = "astrocommunity.diagnostics.lsp_lines-nvim",
-    keys = { "<leader>dl", 'require("lsp_lines").toggle()', desc = "Toggle lsp_lines" },
-  },
-
-  { import = "astrocommunity.media.cord-nvim" },
+  -- {
+  --   import = "astrocommunity.diagnostics.lsp_lines-nvim",
+  --   keys = { "<leader>dl", 'require("lsp_lines").toggle()', desc = "Toggle lsp_lines" },
+  -- },
 
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
@@ -35,7 +33,7 @@ return {
 
   { import = "astrocommunity.pack.docker" },
 
-  { import = "astrocommunity.media.cord-nvim" },
+  -- { import = "astrocommunity.media.cord-nvim" },
   { import = "astrocommunity.search.nvim-spectre" },
   { import = "astrocommunity.project.project-nvim" },
 }

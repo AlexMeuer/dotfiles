@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+FILE="${1}"
+OUT_FILE="${2}"
+WIDTH="${3}"
+
+if [ -z "${FILE}" ]; then
+  FILE=$(gum file --header "Input video:" .)
+elif [ -d "${FILE}" ]; then
+  FILE=$(gum file --header "Input video:" "${FILE}")
+fi
+
+if [ -z "${OUT_FILE}" ]; then
+  DEFAULT_OUT_FILE="$(basename "${FILE}").webm"
+  OUT_FILE=$(gum input --header "Destination:" --placeholder "${DEFAULT_OUT_FILE}")
+  if [ -z "${OUT_FILE}" ]; then
+    OUT_FILE="${DEFAULT_OUT_FILE}"
+  fi
+fi
+
+if [ -z "${WIDTH}" ]; then
+  WIDTH=$(gum input --header "Width:" --value "720")
+fi
+
+ffmpeg -i "${FILE}" -an -c:v libvpx -quality good -crf 24 -cpu-used 0 -b:v 7000k -qmin 10 -qmax 42 -maxrate 500k -bufsize 1500k -threads 8 -c:a libvorbis -b:a 192k -vf scale="${WIDTH}:-1" -f webm "${OUT_FILE}"

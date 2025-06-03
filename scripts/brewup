@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Interactively choose which software to upgrade.
+set -euo pipefail
+SELECTED=$(gum choose --no-limit $(brew outdated --greedy | cut -d' ' -f1))
+if [ -z "$SELECTED" ]; then
+  echo "No packages selected for upgrade."
+  exit 0
+fi
+exec brew upgrade $SELECTED
