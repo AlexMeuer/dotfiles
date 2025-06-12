@@ -3,6 +3,10 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+local Terminal = require("toggleterm.terminal").Terminal
+local sptTerm = Terminal:new { cmd = "spt", direction = "float", count = 8 }
+local napTerm = Terminal:new { cmd = "nap", direction = "float", count = 9 }
+
 local runSpotify = function(args, title)
   require("plenary.job")
     :new({
@@ -85,18 +89,18 @@ return {
         ["<leader>fp"] = { "<cmd>Telescope projects<cr>", desc = "Find Projects" },
         ["<leader>ts"] = {
           -- Assumes that toggle term is available.
-          function() require("astrocore").toggle_term_cmd "spt" end,
+          function() sptTerm:toggle() end,
           desc = "ToggleTerm spotify",
         },
-        ["<leader>tn"] = {
+        ["<leader>ta"] = {
           -- Assumes that toggle term is available.
-          function() require("astrocore").toggle_term_cmd "nap" end,
+          function() napTerm:toggle() end,
           desc = "ToggleTerm Nap",
         },
         ["<leader>m"] = { desc = " Music" },
         ["<leader>mo"] = {
           -- Assumes that toggle term is available.
-          function() require("astrocore").toggle_term_cmd "spt" end,
+          function() sptTerm:toggle() end,
           desc = "ToggleTerm spotify",
         },
         ["<leader>mt"] = {
