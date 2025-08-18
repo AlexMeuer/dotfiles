@@ -39,6 +39,7 @@ sketchybar --bar height=32 \
 
 # Left
 source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/note.sh"
 
 # Right
 source "$ITEM_DIR/data_spacer.sh"

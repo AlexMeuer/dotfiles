@@ -1,0 +1,3 @@
+#!/bin/sh
+# Sets a note on my sketchybar. See my sketchybar config for more details, particularly the `note.sh` scripts.
+exec sketchybar --trigger note_change SKETCHY_NOTE="$*"
