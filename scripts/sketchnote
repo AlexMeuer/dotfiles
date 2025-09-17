@@ -1,3 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Sets a note on my sketchybar. See my sketchybar config for more details, particularly the `note.sh` scripts.
-exec sketchybar --trigger note_change SKETCHY_NOTE="$*"
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+    CURRENT=$(sketchybar --query note | jq -r '.label.value')
+    read -e -i "$CURRENT" -p $'\e[32mNote: \e[0m' -r NOTE
+    exec sketchybar --trigger note_change SKETCHY_NOTE="$NOTE"
+else
+    exec sketchybar --trigger note_change SKETCHY_NOTE="$*"
+fi

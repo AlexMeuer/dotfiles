@@ -74,3 +74,5 @@ ICON_CALENDAR=􀉉
 
 # Clock
 ICON_CLOCK=􀐫
+
+ICON_TIMER=󰄉
