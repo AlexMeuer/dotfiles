@@ -26,12 +26,12 @@ return {
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.tailwindcss" },
-  { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.pack.dart" },
+  -- { import = "astrocommunity.pack.python" },
+  -- { import = "astrocommunity.pack.dart" },
   -- { import = "astrocommunity.pack.nix" },
   -- { import = "astrocommunity.pack.cs" },
 
-  { import = "astrocommunity.pack.docker" },
+  -- { import = "astrocommunity.pack.docker" },
 
   -- { import = "astrocommunity.media.cord-nvim" },
   { import = "astrocommunity.search.nvim-spectre" },

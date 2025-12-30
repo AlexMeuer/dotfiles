@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 if [ "$#" -ne 1 ]; then
 	echo "Usage: $0 NEW_SCRIPT_NAME" >&2
 	exit 1
 fi
 HOME=$(eval echo ~)
-FILEPATH="${HOME}/repos/alexmeuer/dotfiles/scripts/${1}"
+FILEPATH="${HOME}/repos/$(whoami)/dotfiles/scripts/${1}"
 
 do_shellcheck() {
 	if command -v shellcheck >/dev/null 2>&1; then
@@ -22,5 +22,5 @@ if [ -e "${FILEPATH}" ]; then
 	exit $?
 fi
 
-touch "${FILEPATH}" && printf "#!/bin/sh\npwd\nexit \$?" >"${FILEPATH}" && nvim "${FILEPATH}" && chmod +x "${FILEPATH}"
+touch "${FILEPATH}" && printf "#!/usr/bin/env bash\npwd\nexit \$?" >"${FILEPATH}" && nvim "${FILEPATH}" && chmod +x "${FILEPATH}"
 exit $?

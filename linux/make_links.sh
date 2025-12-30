@@ -18,11 +18,12 @@ linkIfNotExists() {
 }
 
 linkIfNotExists ".config/kitty"
-linkIfNotExists ".config/bspwm"
+#linkIfNotExists ".config/bspwm"
 linkIfNotExists ".config/fish"
 linkIfNotExists ".config/nvim"
-linkIfNotExists ".config/polybar"
-linkIfNotExists ".config/ranger"
-linkIfNotExists ".config/rofi"
+#linkIfNotExists ".config/polybar"
+#linkIfNotExists ".config/ranger"
+#linkIfNotExists ".config/rofi"
 linkIfNotExists ".config/sxhkd"
 linkIfNotExists ".config/nap"
+linkIfNotExists ".config/hypr"
