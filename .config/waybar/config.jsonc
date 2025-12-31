@@ -1,0 +1,238 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 0,
+  "modules-left": [
+    "hyprland/workspaces",
+    "idle_inhibitor"
+  ],
+  "modules-center": [
+    "mpris"
+  ],
+  "modules-right": [
+    "cpu",
+    "custom/gpu",
+    "memory",
+    "custom/vram",
+    "temperature",
+    "disk",
+    "wireplumber",
+    "network",
+    "tray",
+    "clock",
+  ],
+  "hyprland/workspaces": {
+    "format": "{id} {windows}",
+    "format-window-separator": " ",
+    "window-rewrite-default": "",
+    "on-click": "activate",
+    "sort-by": "id",
+    "all-outputs": false,
+    "active-only": false,
+    "persistent-workspaces": {
+      "DP-1": 6,
+    },
+    "window-rewrite": {
+      // Title-based detection for terminal apps (must come before class-only rules)
+      // Text editors
+      "class<kitty> title<.*[Nn]vim.*>": "",
+      "class<kitty> title<.*yazi.*>": "󰉋",
+      "class<kitty> title<.*ranger.*>": "󰉋",
+      "class<kitty> title<.*htop.*>": "󰄨",
+      "class<kitty> title<.*btop.*>": "󰄨",
+      "class<kitty> title<.*nvtop.*>": "󰄨",
+      "class<kitty> title<.*lazygit.*>": "󰊢",
+      "class<firefox>": "󰈹",
+      // Terminal emulators
+      "class<kitty>": "󰄛",
+      "class<alacritty>": "󰆍",
+      // Code editors and IDEs
+      "class<code>": "󰨞",
+      "class<Code>": "󰨞",
+      "class<VSCodium>": "󰨞",
+      "class<neovim>": "",
+      "class<nvim>": "",
+      "class<vim>": "",
+      // Communication
+      "class<discord>": "",
+      "class<Discord>": "",
+      "class<vesktop>": "",
+      "class<slack>": "󰒱",
+      "class<Slack>": "󰒱",
+      "class<signal>": "󰭹",
+      "class<thunderbird>": "󰇰",
+      // File managers
+      "class<dolphin>": "󰉋",
+      "class<nautilus>": "󰉋",
+      "class<thunar>": "󰉋",
+      "class<yazi>": "󰉋",
+      "class<ranger>": "󰉋",
+      // Media players
+      "class<vlc>": "󰕼",
+      "class<mpv>": "󰎆",
+      "class<spotify>": "󰎆",
+      "class<Spotify>": "󰎆",
+      // Gaming
+      "class<steam>": "󰓓",
+      "class<Steam>": "󰓓",
+      // Graphics and video
+      "class<gimp>": "󰏘",
+      "class<GIMP>": "󰏘",
+      "class<blender>": "󰂫",
+      // Office and productivity
+      "class<libreoffice>": "󰈙",
+      "class<libreoffice-writer>": "󰈙",
+      "class<libreoffice-calc>": "󰈙",
+      "class<obsidian>": "󰠮",
+      "class<Obsidian>": "󰠮",
+      // Development tools
+      "class<lazygit>": "󰊢",
+      "class<docker>": "󰡨",
+      "class<Docker>": "󰡨",
+      // Utilities
+      "class<pavucontrol>": "󰕾",
+    },
+  },
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "format-stopped": "",
+    "player-icons": {
+      "default": "",
+      "spotify": "󰓇",
+      "mpv": "",
+    },
+    "status-icons": {
+      "paused": "",
+      "stopped": "■",
+    },
+    "max-length": 50,
+    "tooltip": true,
+    "tooltip-format": "{player}: {artist} - {title}",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+  },
+  "wireplumber": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰖁  {volume}%",
+    "format-icons": [
+      "",
+      ""
+    ],
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "max-volume": 150,
+    "tooltip": true,
+    "tooltip-format": "Volume: {volume}%",
+  },
+  "cpu": {
+    "interval": 2,
+    "format": " {usage:2}%",
+    "tooltip": true,
+    "tooltip-format": "CPU: {usage}%\nCores: {load}",
+    "on-click": "kitty -e btop",
+    "states": {
+      "warning": 70,
+      "critical": 90,
+    },
+  },
+  "custom/gpu": {
+    "format": "󰆦 {}%",
+    "interval": 2,
+    "exec": "~/.config/waybar/scripts/gpu.sh",
+    "tooltip": true,
+    "tooltip-format": "GPU Usage: {}%",
+    "on-click": "kitty -e nvidia-smi",
+  },
+  "memory": {
+    "interval": 5,
+    "format": "  {percentage:2}%",
+    "tooltip": true,
+    "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G",
+    "on-click": "kitty -e btop",
+    "states": {
+      "warning": 70,
+      "critical": 90,
+    },
+  },
+  "custom/vram": {
+    "format": "󰆦 {}",
+    "interval": 5,
+    "exec": "~/.config/waybar/scripts/vram.sh",
+    "return-type": "json",
+    "on-click": "kitty -e nvidia-smi",
+  },
+  "temperature": {
+    "interval": 5,
+    "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip": true,
+    "on-click": "kitty -e sensors",
+  },
+  "disk": {
+    "interval": 30,
+    "format": " {percentage_used}%",
+    "path": "/",
+    "tooltip": true,
+    "tooltip-format": "Disk: {used} / {total}",
+    "states": {
+      "warning": 70,
+      "critical": 90,
+    },
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪",
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Screen won't lock",
+    "tooltip-format-deactivated": "Screen will lock",
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-disconnected": "󰌙 Disconnected",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "on-click": "nm-connection-editor",
+  },
+  "tray": {
+    "spacing": 10,
+    "icon-size": 16,
+  },
+  "clock": {
+    "interval": 1,
+    "format": "{:%a %d %b %H:%M:%S}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#d8a657'><b>{}</b></span>",
+        "days": "<span color='#ddc7a1'>{}</span>",
+        "weeks": "<span color='#89b482'>W{}</span>",
+        "weekdays": "<span color='#a9b665'><b>{}</b></span>",
+        "today": "<span color='#ea6962'><b><u>{}</u></b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
+  },
+}

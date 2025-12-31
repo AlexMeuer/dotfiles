@@ -1,0 +1,264 @@
+/* Gruvbox Material Dark Theme for Waybar */
+
+/* GTK Color Definitions */
+@define-color bg0 #1d2021;
+@define-color bg1 #282828;
+@define-color bg2 #32302f;
+@define-color bg3 #3c3836;
+
+@define-color fg0 #ddc7a1;
+@define-color fg1 #d4be98;
+@define-color fg2 #c7b68e;
+
+@define-color red #ea6962;
+@define-color green #a9b665;
+@define-color yellow #d8a657;
+@define-color blue #7daea3;
+@define-color purple #d3869b;
+@define-color aqua #89b482;
+@define-color orange #e78a4e;
+
+* {
+  border: none;
+  border-radius: 8px;
+  font-family: "Hack Nerd Font", "Font Awesome 6 Free", monospace;
+  font-size: 13px;
+  min-height: 0;
+  font-weight: 500;
+}
+
+/* Base Window */
+window#waybar {
+  background-color: @bg0;
+  color: @fg0;
+  border-bottom: 1px solid @bg3;
+  border-radius: 0;
+}
+
+/* Common Module Styling */
+#workspaces,
+#idle_inhibitor,
+#mpris,
+#cpu,
+#custom-gpu,
+#memory,
+#custom-vram,
+#temperature,
+#disk,
+#wireplumber,
+#network,
+#tray,
+#clock {
+  padding: 4px 12px;
+  margin: 4px 2px;
+  background-color: @bg1;
+  color: @fg0;
+  border-left: 2px solid @bg3;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover Effects */
+#mpris:hover,
+#cpu:hover,
+#custom-gpu:hover,
+#memory:hover,
+#custom-vram:hover,
+#temperature:hover,
+#disk:hover,
+#wireplumber:hover,
+#network:hover,
+#clock:hover,
+#idle_inhibitor:hover {
+  background-color: @bg2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 0;
+  border-left: none;
+}
+
+#workspaces button {
+  padding: 2px 6px 2px 2px;
+  margin: 2px 2px;
+  background-color: transparent;
+  color: @fg2;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  min-width: 30px;
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  background-color: @bg2;
+  color: @fg0;
+}
+
+#workspaces button.active {
+  color: @fg0;
+  background-color: transparent;
+  border: 2px solid @fg2;
+  font-weight: bold;
+}
+
+#workspaces button.urgent {
+  color: @red;
+  border: 2px solid @red;
+}
+
+/* MPRIS (Media Player) */
+#mpris {
+  background-color: @bg1;
+  color: @fg0;
+}
+
+#mpris.playing {
+  color: @purple;
+}
+
+#mpris.paused {
+  color: @fg2;
+}
+
+#mpris:hover {
+  background-color: @bg2;
+}
+
+/* CPU */
+#cpu {
+  color: @blue;
+  border-left-color: @blue;
+}
+
+#cpu.warning {
+  color: @yellow;
+}
+
+#cpu.critical {
+  color: @red;
+}
+
+/* GPU */
+#custom-gpu {
+  color: @blue;
+  border-left-color: @blue;
+}
+
+/* Memory */
+#memory {
+  color: @green;
+  border-left-color: @green;
+}
+
+#memory.warning {
+  color: @yellow;
+}
+
+#memory.critical {
+  color: @red;
+}
+
+/* VRAM */
+#custom-vram {
+  color: @green;
+  border-left-color: @green;
+}
+
+/* Temperature */
+#temperature {
+  color: @aqua;
+  border-left-color: @aqua;
+}
+
+#temperature.critical {
+  color: @red;
+}
+
+/* Disk */
+#disk {
+  color: @orange;
+  border-left-color: @orange;
+}
+
+#disk.warning {
+  color: @yellow;
+}
+
+#disk.critical {
+  color: @red;
+}
+
+/* Idle Inhibitor */
+#idle_inhibitor {
+  padding: 4px 10px;
+  color: @fg2;
+}
+
+#idle_inhibitor.activated {
+  color: @orange;
+  background-color: rgba(231, 138, 78, 0.1);
+  font-weight: bold;
+}
+
+/* WirePlumber (Volume) */
+#wireplumber {
+  color: @aqua;
+  border-left-color: @aqua;
+}
+
+#wireplumber.muted {
+  color: @red;
+}
+
+/* Network */
+#network {
+  color: @yellow;
+}
+
+#network.disconnected {
+  color: @red;
+}
+
+#network:hover {
+  background-color: @bg2;
+}
+
+/* System Tray */
+#tray {
+  padding-right: 12px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  color: @red;
+}
+
+/* Clock */
+#clock {
+  color: @orange;
+  font-weight: bold;
+  border-left: none;
+  border-right: none;
+}
+
+#clock:hover {
+  background-color: @bg2;
+}
+
+/* Tooltips */
+tooltip {
+  background-color: @bg2;
+  border: 1px solid @bg3;
+  border-radius: 0;
+  padding: 8px 12px;
+}
+
+tooltip label {
+  color: @fg0;
+  font-family: "Hack Nerd Font", monospace;
+}
