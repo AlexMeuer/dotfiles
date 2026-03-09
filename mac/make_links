@@ -24,6 +24,7 @@ linkIfNotExists ".config/nvim"
 linkIfNotExists ".config/ranger"
 linkIfNotExists ".config/sketchybar"
 linkIfNotExists ".config/nap"
+linkIfNotExists ".config/tmux"
 
 linkIfNotExists "mac/.yabairc" ".yabairc"
 linkIfNotExists "mac/.skhdrc" ".skhdrc"
