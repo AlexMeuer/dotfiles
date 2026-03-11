@@ -24,4 +24,4 @@ if [ -z "${WIDTH}" ]; then
   WIDTH=$(gum input --header "Width:" --value "720")
 fi
 
-ffmpeg -i "${FILE}" -an -c:v libvpx -quality good -crf 24 -cpu-used 0 -b:v 7000k -qmin 10 -qmax 42 -maxrate 500k -bufsize 1500k -threads 8 -c:a libvorbis -b:a 192k -vf scale="${WIDTH}:-1" -f webm "${OUT_FILE}"
+ffmpeg -i "${FILE}" -an -c:v libvpx -quality good -crf 24 -b:v 7000k -qmin 10 -qmax 42 -maxrate 500k -bufsize 1500k -threads 8 -c:a libvorbis -b:a 192k -vf scale="${WIDTH}:-1" -f webm "${OUT_FILE}"

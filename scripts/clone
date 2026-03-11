@@ -1,7 +1,8 @@
 #!/bin/sh
 # Description: Clone a GitHub repo to ~/repos/<user>/<repo>
-# Usage: clone <user>/<repo>
+# Usage: clone <user>/<repo> [git flags...]
 # Example: clone johndoe/myrepo
+# Example: clone johndoe/myrepo --bare
 
 set -e
 
@@ -15,8 +16,10 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-USER=$(echo "$1" | cut -d/ -f1)
-REPO=$(echo "$1" | cut -d/ -f2)
+SLUG="$1"
+shift
+USER=$(echo "$SLUG" | cut -d/ -f1)
+REPO=$(echo "$SLUG" | cut -d/ -f2)
 
 mkdir -p "${HOME}/repos/${USER}"
 
@@ -28,6 +31,6 @@ if [ -d "${HOME}/repos/${USER}/${REPO}" ]; then
 fi
 
 
-gh repo clone "${1}" "${REPO_PATH}"
+gh repo clone "${SLUG}" "${REPO_PATH}" -- "$@"
 
 printf "Repo cloned to %s\n" "${REPO_PATH}"
