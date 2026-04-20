@@ -1,156 +1,43 @@
+---@type LazySpec
 return {
-  -- Colorscheme(s)
+  -- Colorschemes
   { "sainnhe/gruvbox-material" },
   { "sainnhe/everforest" },
 
-  -- Must-have: fuzzy jumper
+  -- Fuzzy motion
   { "rlane/pounce.nvim", keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
 
-  -- Vim-aware ctrl+hjkl navigation across tmux panes and nvim splits
+  -- Seamless nav across nvim splits + tmux/kitty/wezterm panes (replaces vim-kitty-navigator)
   {
-    "christoomey/vim-tmux-navigator",
+    "mrjones2014/smart-splits.nvim",
+    lazy = false,
+    build = "./kitty/install-kittens.bash",
+    opts = {
+      -- tmux is the closer multiplexer when running kitty → tmux → nvim.
+      -- At nvim edge, smart-splits shells out to `tmux select-pane` to switch panes.
+      multiplexer_integration = "tmux",
+    },
     keys = {
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Navigate left" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Navigate down" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Navigate up" },
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Navigate right" },
+      { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" },
+      { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" },
+      { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" },
+      { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" },
     },
   },
 
-  -- See and select registers
-  { "gennaro-tedesco/nvim-peekup", event = "VeryLazy" },
-
+  -- Focus modes
   {
     "folke/twilight.nvim",
     keys = { { "<leader>ux", "<cmd>Twilight<cr>", desc = "Twilight (code dimming)" } },
   },
   {
     "folke/zen-mode.nvim",
-    keys = {
-      { "<leader>uZ", "<cmd>ZenMode<cr>", desc = "Zen Mode" },
-    },
+    keys = { { "<leader>uZ", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
-  {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = { { "<leader>lt", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" } },
-  },
-  { "anuvyklack/middleclass" },
-  { "anuvyklack/animation.nvim" },
-  {
-    "anuvyklack/windows.nvim",
-    requires = {
-      "anuvyklack/middleclass",
-      "anuvyklack/animation.nvim",
-    },
-    config = function()
-      vim.o.winwidth = 10
-      vim.o.winminwidth = 10
-      vim.o.equalalways = false
-      require("windows").setup()
-    end,
-    keys = {
-      { "<C-w>t", "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle autowidth" },
-      { "<C-w>z", "<cmd>WindowsMaximize<cr>", desc = "Maximize" },
-    },
-  },
-
-  -- { "andweeb/presence.nvim" },
 
   -- Markdown previewer
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 
-  { "memgraph/cypher.vim" },
-
-  {
-    "greggh/claude-code.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for git operations
-    },
-    config = function() require("claude-code").setup() end,
-  },
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-    opts = {
-      -- add any opts here
-      -- for example
-      provider = "copilot", -- or "openai" etc
-      -- copilot = {
-      --   disabled_tools = {
-      --     "list_files",
-      --     "search_files",
-      --     "read_file",
-      --     "create_file",
-      --     "rename_file",
-      --     "delete_file",
-      --     "create_dir",
-      --     "rename_dir",
-      --     "delete_dir",
-      --     "bash",
-      --   },
-      -- },
-      -- openai = {
-      --   endpoint = "https://api.openai.com/v1",
-      --   model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-      --   timeout = 30000, -- timeout in milliseconds
-      --   temperature = 0, -- adjust if needed
-      --   max_tokens = 4096,
-      --   -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
-      -- },
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "echasnovski/mini.pick", -- for file_selector provider mini.pick
-      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua", -- for file_selector provider fzf
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      -- "zbirenbaum/copilot.lua", -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
-      -- {
-      --   "ravitemer/mcphub.nvim",
-      --   dependencies = {
-      --     "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
-      --   },
-      --   -- uncomment the following line to load hub lazily
-      --   --cmd = "MCPHub",  -- lazy load
-      --   build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
-      --   -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
-      --   -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
-      --   config = function() require("mcphub").setup() end,
-      -- },
-    },
-  },
+  -- Git blame virtual text (reads blamer_* vim.g vars set in astrocore)
+  { "APZelos/blamer.nvim", event = "VeryLazy" },
 }

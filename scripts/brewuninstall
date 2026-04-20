@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SELECTED=$(gum choose --no-limit $(brew leaves))
+if [ -z "$SELECTED" ]; then
+  echo "No packages selected for uninstall."
+  exit 0
+fi
+exec brew uninstall $SELECTED
