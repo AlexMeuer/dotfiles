@@ -6,11 +6,15 @@ return {
   -- Must-have: fuzzy jumper
   { "rlane/pounce.nvim", keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
 
-  -- Navigate aruound kitty and nvim with same pane bindings
-  -- Additional kitty setup required. https://github.com/knubie/vim-kitty-navigator
+  -- Vim-aware ctrl+hjkl navigation across tmux panes and nvim splits
   {
-    "knubie/vim-kitty-navigator",
-    event = "VeryLazy",
+    "christoomey/vim-tmux-navigator",
+    keys = {
+      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Navigate left" },
+      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Navigate down" },
+      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Navigate up" },
+      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Navigate right" },
+    },
   },
 
   -- See and select registers
@@ -51,9 +55,20 @@ return {
     },
   },
 
+  -- { "andweeb/presence.nvim" },
+
   -- Markdown previewer
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 
+  { "memgraph/cypher.vim" },
+
+  {
+    "greggh/claude-code.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- Required for git operations
+    },
+    config = function() require("claude-code").setup() end,
+  },
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
@@ -100,7 +115,7 @@ return {
       "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
       "ibhagwan/fzf-lua", -- for file_selector provider fzf
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      -- "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
@@ -124,6 +139,18 @@ return {
         },
         ft = { "markdown", "Avante" },
       },
+      -- {
+      --   "ravitemer/mcphub.nvim",
+      --   dependencies = {
+      --     "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+      --   },
+      --   -- uncomment the following line to load hub lazily
+      --   --cmd = "MCPHub",  -- lazy load
+      --   build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+      --   -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
+      --   -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
+      --   config = function() require("mcphub").setup() end,
+      -- },
     },
   },
 }

@@ -36,4 +36,6 @@ return {
   -- { import = "astrocommunity.media.cord-nvim" },
   { import = "astrocommunity.search.nvim-spectre" },
   { import = "astrocommunity.project.project-nvim" },
+
+  { import = "astrocommunity.completion.tabby-nvim" },
 }

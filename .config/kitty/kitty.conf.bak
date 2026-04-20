@@ -626,7 +626,60 @@ hide_window_decorations yes
 
 #: Color scheme {{{
 
-# Note to self: use `kitty +kitten themes` to manage the theme.
+# BEGIN GRUVBOX SCHEME
+background #282828
+foreground #d4be98
+
+selection_background #d4be98
+selection_foreground #282828
+
+cursor #a89984
+cursor_text_color background
+
+active_tab_background #282828
+active_tab_foreground #d4be98
+active_tab_font_style bold
+inactive_tab_background #282828
+inactive_tab_foreground #a89984
+inactive_tab_font_style normal
+
+# Black
+color0 #665c54
+color8 #928374
+
+# Red
+color1 #ea6962
+color9 #fb4934
+
+# Green
+color2 #a9b665
+color10 #b8bb26
+
+# Yellow
+color3 #fe8019
+color11 #fabd2f
+
+# Blue
+color4 #458588
+color12 #83a598
+
+# Magenta
+color5 #b16286
+color13 #d3869b
+
+# Cyan
+color6 #689d6a
+color14 #8ec07c
+
+# White
+color7 #ebdbb2
+color15 #fbf1c7
+
+# END GRUVBOX SCHEME
+
+
+# foreground #dddddd
+# background #000000
 
 #: The foreground and background colors
 
@@ -1132,7 +1185,7 @@ macos_quit_when_last_window_closed yes
 
 # map cmd+n       new_os_window
 # making cmd+n a no-op because that's my nvim NERDTree toggle.
-# map cmd+n      no_op 
+map cmd+n      no_op 
 # map kitty_mod+w close_window
 # map shift+cmd+d close_window
 # map kitty_mod+] next_window
@@ -1349,17 +1402,12 @@ macos_quit_when_last_window_closed yes
 
 # }}}
 
-# ── Shift+Enter: send CSI u sequence so apps (e.g. Claude Code) can
-#    distinguish it from plain Enter, even inside tmux.
-map shift+enter send_text all \x1b[13;2u
-
-# NOTE: vim-kitty-navigator disabled — using vim-tmux-navigator inside tmux
-# instead, which handles ctrl+hjkl pane/split navigation at the tmux layer.
-# If you ever use kitty panes without tmux, re-enable these.
-# map ctrl+j kitten pass_keys.py bottom ctrl+j
-# map ctrl+k kitten pass_keys.py top    ctrl+k
-# map ctrl+h kitten pass_keys.py left   ctrl+h
-# map ctrl+l kitten pass_keys.py right  ctrl+l
+# Begin vim-kitty-navigator section
+# https://github.com/knubie/vim-kitty-navigator
+map ctrl+j kitten pass_keys.py bottom ctrl+j
+map ctrl+k kitten pass_keys.py top    ctrl+k
+map ctrl+h kitten pass_keys.py left   ctrl+h
+map ctrl+l kitten pass_keys.py right  ctrl+l
 
 # For linux only:
 # allow_remote_control yes
@@ -1368,16 +1416,4 @@ map shift+enter send_text all \x1b[13;2u
 # Other unix systems:
 allow_remote_control yes
 listen_on unix:/tmp/mykitty
-
-
-# BEGIN_KITTY_THEME
-# Gruvbox Material Dark Medium
-include current-theme.conf
-# END_KITTY_THEME
-active_tab_background #282828
-active_tab_foreground #d4be98
-active_tab_font_style bold
-inactive_tab_background #282828
-inactive_tab_foreground #a89984
-inactive_tab_font_style normal
-
+# End vim-kitty-navigator section
