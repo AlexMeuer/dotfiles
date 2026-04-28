@@ -93,6 +93,13 @@ return {
     opts.dashboard = opts.dashboard or {}
     opts.dashboard.preset = opts.dashboard.preset or {}
     opts.dashboard.preset.header = block(splashes[math.random(#splashes)])
+
+    local function set_header_hl()
+      vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { link = "Yellow" })
+    end
+    set_header_hl()
+    vim.api.nvim_create_autocmd("ColorScheme", { callback = set_header_hl })
+
     opts.dashboard.preset.keys = {}
     opts.dashboard.sections = {
       { section = "header" },
