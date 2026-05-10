@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Create a headless monitor to the right of the current one and start Sunshine
+
+hyprctl keyword monitor DP-1,2560x1440@60,0x0,1
+monitors_before=$(hyprctl monitors -j | jq -r '.[].name')
+hyprctl output create headless
+headless_name=$(comm -13 <(echo "$monitors_before" | sort) <(hyprctl monitors -j | jq -r '.[].name' | sort))
+hyprctl keyword monitor "$headless_name",1728x1117,2560x0,1
+
+sunshine
