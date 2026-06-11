@@ -2,10 +2,9 @@
 return {
   -- Colorschemes
   { "sainnhe/gruvbox-material" },
-  { "sainnhe/everforest" },
 
-  -- Fuzzy motion
-  { "rlane/pounce.nvim", keys = { { "f", "<cmd>Pounce<cr>", desc = "Pounce" } } },
+  -- Disable shipped outline (using LSP/treesitter nav instead)
+  { "stevearc/aerial.nvim", enabled = false },
 
   -- Seamless nav across nvim splits + tmux/kitty/wezterm panes (replaces vim-kitty-navigator)
   {
@@ -34,10 +33,4 @@ return {
     "folke/zen-mode.nvim",
     keys = { { "<leader>uZ", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
-
-  -- Markdown previewer
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
-
-  -- Git blame virtual text (reads blamer_* vim.g vars set in astrocore)
-  { "APZelos/blamer.nvim", event = "VeryLazy" },
 }

@@ -10,12 +10,13 @@ return {
       large_buf = { size = 1024 * 256, lines = 10000 },
       autopairs = true,
       cmp = true,
-      diagnostics = { virtual_text = true, virtual_lines = false },
       highlighturl = true,
       notifications = true,
     },
+    -- Passed to `vim.diagnostic.config()` — single source of truth for rendering.
     diagnostics = {
       virtual_text = true,
+      virtual_lines = false,
       underline = true,
     },
     options = {
@@ -23,15 +24,9 @@ return {
         relativenumber = true,
         number = true,
         spell = false,
-        signcolumn = "auto",
+        signcolumn = "yes",
         wrap = true,
-        conceallevel = 2,
-      },
-      g = {
-        blamer_enabled = true,
-        blamer_show_in_visual_modes = true,
-        blamer_show_in_insert_modes = true,
-        blamer_relative_time = true,
+        conceallevel = 1,
       },
     },
     mappings = {
@@ -48,7 +43,23 @@ return {
           desc = "Close buffer from tabline",
         },
 
-        ["<leader>uo"] = { "<cmd>AerialToggle<cr>", desc = "Toggle Outline" },
+        -- Flash on `f`/`F` instead of native find-char; disable community defaults `s`/`S`
+        f = { function() require("flash").jump() end, desc = "Flash jump" },
+        F = { function() require("flash").treesitter() end, desc = "Flash treesitter" },
+        s = false,
+        S = false,
+      },
+      x = {
+        f = { function() require("flash").jump() end, desc = "Flash jump" },
+        F = { function() require("flash").treesitter() end, desc = "Flash treesitter" },
+        s = false,
+        S = false,
+      },
+      o = {
+        f = { function() require("flash").jump() end, desc = "Flash jump" },
+        F = { function() require("flash").treesitter() end, desc = "Flash treesitter" },
+        s = false,
+        S = false,
       },
     },
   },

@@ -9,7 +9,16 @@ return {
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
 
-  { import = "astrocommunity.completion.copilot-lua-cmp" },
+  -- Copilot inline ghost-text suggestions (blink.cmp remains the completion-menu engine)
+  { import = "astrocommunity.completion.copilot-lua" },
+
+  -- Motion: flash enhances f/t/F/T with labels instead of replacing them
+  { import = "astrocommunity.motion.flash-nvim" },
+  -- Named, persistent, project-scoped file slots
+  { import = "astrocommunity.motion.harpoon" },
+
+  -- In-buffer markdown rendering (replaces archived glow.nvim; tmux-safe, no graphics protocol)
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
 
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
@@ -22,5 +31,6 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.tailwindcss" },
 
-  { import = "astrocommunity.search.nvim-spectre" },
+  -- Project-wide find & replace with live preview (ripgrep-backed; replaces nvim-spectre)
+  { import = "astrocommunity.search.grug-far-nvim" },
 }
