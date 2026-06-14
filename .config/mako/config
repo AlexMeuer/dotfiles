@@ -1,0 +1,17 @@
+background-color=#fbf1c7
+text-color=#654735
+border-color=#e5d5ad
+progress-color=#7daea3
+border-size=4
+border-radius=4
+default-timeout=8000
+font=HackNerdFont 12
+
+[urgency=low]
+border-color=#A89984
+default-timeout=3000
+
+[urgency=critical]
+border-color=#EA6962
+text-color=#4C3432
+default-timeout=0
