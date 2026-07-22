@@ -33,4 +33,7 @@ return {
     "folke/zen-mode.nvim",
     keys = { { "<leader>uZ", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
+
+  -- Docker Roast
+  { "immanuwell/droast.nvim" },
 }
