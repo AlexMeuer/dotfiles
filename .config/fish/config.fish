@@ -8,6 +8,8 @@ if status is-interactive
   # starship init fish | source
 end
 
+
+abbr -a -- v nvim
 abbr -a -- gitl lazygit
 abbr -a -- agenda 'gcalcli agenda (date) (date  -v 23H -v 59M -v 59S) --details=location'
 abbr -a -- search 'firefox -foreground -search'
