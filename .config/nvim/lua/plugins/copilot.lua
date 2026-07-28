@@ -1,4 +1,7 @@
--- Make <Tab> accept Copilot inline suggestions.
+-- Copilot suggestions are manual-only (auto_trigger = false below): nothing
+-- shows up while typing, <C-y> (Insert mode) asks for a suggestion on demand.
+--
+-- <Tab> then accepts whatever ghost text is visible.
 --
 -- Two separate engines run here: copilot.lua draws inline ghost text, while
 -- blink.cmp drives the popup completion menu. By default copilot's accept key
@@ -11,33 +14,42 @@
 --   * blink menu showing         -> <Tab> cycles/expands as before.
 --   * neither                    -> falls back to a literal tab.
 
----@type LazySpec
+---@type LazySpec[]
 return {
-  "Saghen/blink.cmp",
-  optional = true,
-  opts = function(_, opts)
-    -- Reimplemented locally; AstroNvim's own copy is a file-scoped local.
-    local function has_words_before()
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0
-        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-    end
+  {
+    "zbirenbaum/copilot.lua",
+    opts = { suggestion = { auto_trigger = false } },
+    keys = {
+      { "<C-y>", function() require("copilot.suggestion").next() end, mode = "i", desc = "Copilot: suggest" },
+    },
+  },
+  {
+    "Saghen/blink.cmp",
+    optional = true,
+    opts = function(_, opts)
+      -- Reimplemented locally; AstroNvim's own copy is a file-scoped local.
+      local function has_words_before()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0
+          and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+      end
 
-    opts.keymap = opts.keymap or {}
-    opts.keymap["<Tab>"] = {
-      function()
-        local ok, suggestion = pcall(require, "copilot.suggestion")
-        if ok and suggestion.is_visible() then
-          suggestion.accept()
-          return true -- consume <Tab>; stop the chain
-        end
-      end,
-      "select_next",
-      "snippet_forward",
-      function(cmp)
-        if has_words_before() or vim.api.nvim_get_mode().mode == "c" then return cmp.show() end
-      end,
-      "fallback",
-    }
-  end,
+      opts.keymap = opts.keymap or {}
+      opts.keymap["<Tab>"] = {
+        function()
+          local ok, suggestion = pcall(require, "copilot.suggestion")
+          if ok and suggestion.is_visible() then
+            suggestion.accept()
+            return true -- consume <Tab>; stop the chain
+          end
+        end,
+        "select_next",
+        "snippet_forward",
+        function(cmp)
+          if has_words_before() or vim.api.nvim_get_mode().mode == "c" then return cmp.show() end
+        end,
+        "fallback",
+      }
+    end,
+  },
 }
