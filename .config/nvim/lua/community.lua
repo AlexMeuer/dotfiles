@@ -9,7 +9,8 @@ return {
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
 
-  -- Copilot inline ghost-text suggestions (blink.cmp remains the completion-menu engine)
+  -- Copilot: import kept so re-enabling is one line (plugins/copilot.lua sets
+  -- enabled = false). Replaced by Tabby, see plugins/tabby.lua.
   { import = "astrocommunity.completion.copilot-lua" },
 
   -- Motion: flash enhances f/t/F/T with labels instead of replacing them

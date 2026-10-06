@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+function notice() {
+  printf "\n -- %s --\n" "${1}" | lolcat
+}
+function log() {
+  echo "    ${1}" | lolcat
+}
+
+notice "Starting Tabby"
+
+MODEL="Qwen2.5-Coder-3B"
+log "Model: ${MODEL}"
+ID=$(podman run -d --rm \
+  --device nvidia.com/gpu=all \
+  -p 8188:8080 \
+  -e TABBY_WEBSERVER_JWT_TOKEN_SECRET="${TABBY_WEBSERVER_JWT_TOKEN_SECRET}" \
+  -v "${HOME}/.tabby:/data" \
+  tabbyml/tabby \
+  serve --model "${MODEL}" --device cuda)
+
+log "Podman ID: ${ID}"
+
+function cleanup {
+  notice "Stopping Tabby"
+  podman stop "${ID}"
+}
+
+trap cleanup EXIT
+
+podman logs -f "${ID}"

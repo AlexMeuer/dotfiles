@@ -1,13 +1,73 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-# Create a headless monitor to the right of the current one and start Sunshine
+# Create a headless monitor to the right of the current one and start Sunshine.
+#
+# Hyprland >= 0.56 with a Lua config runs the non-legacy parser, which rejects
+# `hyprctl keyword` outright -- and hyprctl still exits 0 while doing so, so
+# `set -e` will not catch it. Config mutation therefore goes through
+# `hyprctl eval` and the same hl.* API the Lua config uses.
 
-hyprctl keyword monitor DP-1,2560x1440@60,0x0,1
-monitors_before=$(hyprctl monitors -j | jq -r '.[].name')
-hyprctl output create headless
-headless_name=$(comm -13 <(echo "$monitors_before" | sort) <(hyprctl monitors -j | jq -r '.[].name' | sort))
-hyprctl keyword monitor "$headless_name",1728x1117,2560x0,1
+primary_mode="2560x1440@60"
+primary_pos="0x0"
+headless_mode="1728x1117@60"
+headless_pos="2560x0"
 
-sunshine
+# hyprctl needs HYPRLAND_INSTANCE_SIGNATURE, which is missing in any shell not
+# descended from the compositor -- notably a tmux server first started over ssh.
+# uwsm publishes it to the systemd user manager, so recover it from there.
+if [[ -z ${HYPRLAND_INSTANCE_SIGNATURE:-} ]]; then
+	HYPRLAND_INSTANCE_SIGNATURE=$(systemctl --user show-environment | sed -n 's/^HYPRLAND_INSTANCE_SIGNATURE=//p')
+	export HYPRLAND_INSTANCE_SIGNATURE
+fi
+
+if [[ -z $HYPRLAND_INSTANCE_SIGNATURE ]]; then
+	echo "could not resolve HYPRLAND_INSTANCE_SIGNATURE (is Hyprland running?)" >&2
+	exit 1
+fi
+
+# hyprctl reports refusals in its reply text rather than its exit status.
+hypr() {
+	local reply
+	reply=$(hyprctl "$@")
+	if [[ $reply != "ok" ]]; then
+		echo "hyprctl $* -> $reply" >&2
+		exit 1
+	fi
+}
+
+monitor_names() {
+	hyprctl monitors all -j | jq -r '.[].name' | sort
+}
+
+hypr eval "hl.monitor({output='DP-1', mode='$primary_mode', position='$primary_pos', scale=1})"
+
+before=$(monitor_names)
+hypr output create headless
+after=$(monitor_names)
+
+# Hyprland numbers headless outputs sequentially, and the index is not stable
+# across sessions, so discover the name rather than assuming HEADLESS-1/2.
+headless_name=$(comm -13 <(echo "$before") <(echo "$after"))
+
+if [[ -z $headless_name ]]; then
+	echo "no new output appeared after 'output create headless'" >&2
+	exit 1
+fi
+
+if [[ $(wc -l <<<"$headless_name") -ne 1 ]]; then
+	echo "expected exactly one new output, got:" >&2
+	echo "$headless_name" >&2
+	exit 1
+fi
+
+# Drop the output again on the way out, so repeat runs do not accumulate
+# headless monitors and shift the numbering.
+trap 'hyprctl output remove "$headless_name" >/dev/null' EXIT
+
+hypr eval "hl.monitor({output='$headless_name', mode='$headless_mode', position='$headless_pos', scale=1})"
+
+# Pass the discovered name explicitly; the output_name in sunshine.conf is a
+# hardcoded index and goes stale whenever the numbering shifts.
+sunshine output_name="$headless_name"

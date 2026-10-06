@@ -77,7 +77,9 @@ local function block(lines)
   local max = 0
   for _, l in ipairs(lines) do
     local w = vim.fn.strdisplaywidth(l)
-    if w > max then max = w end
+    if w > max then
+      max = w
+    end
   end
   local out = {}
   for _, l in ipairs(lines) do

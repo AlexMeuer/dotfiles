@@ -3,8 +3,12 @@
   "position": "top",
   "height": 38,
   "spacing": 0,
-  "modules-left": ["hyprland/workspaces", "idle_inhibitor"],
-  "modules-center": ["mpris"],
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "mpris"
+  ],
   "modules-right": [
     "cpu",
     "custom/gpu",
@@ -15,7 +19,7 @@
     "wireplumber",
     "network",
     "tray",
-    "clock",
+    "clock"
   ],
   "hyprland/workspaces": {
     "format": "{id} {windows}",
@@ -26,7 +30,7 @@
     "all-outputs": false,
     "active-only": false,
     "persistent-workspaces": {
-      "DP-1": 6,
+      "DP-1": 6
     },
     "window-rewrite": {
       // Title-based detection for terminal apps (must come before class-only rules)
@@ -86,8 +90,8 @@
       "class<docker>": "󰡨",
       "class<Docker>": "󰡨",
       // Utilities
-      "class<pavucontrol>": "󰕾",
-    },
+      "class<pavucontrol>": "󰕾"
+    }
   },
   "mpris": {
     "format": "{player_icon} {dynamic}",
@@ -96,28 +100,31 @@
     "player-icons": {
       "default": "",
       "spotify": "󰓇",
-      "mpv": "",
+      "mpv": ""
     },
     "status-icons": {
       "paused": "",
-      "stopped": "■",
+      "stopped": "■"
     },
     "max-length": 50,
     "tooltip": true,
     "tooltip-format": "{player}: {artist} - {title}",
     "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
+    "on-click-right": "playerctl next"
   },
   "wireplumber": {
     "format": "{icon}  {volume}%",
     "format-muted": "󰖁  {volume}%",
-    "format-icons": ["", ""],
+    "format-icons": [
+      "",
+      ""
+    ],
     "scroll-step": 5,
     "on-click": "pavucontrol",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "max-volume": 150,
     "tooltip": true,
-    "tooltip-format": "Volume: {volume}%",
+    "tooltip-format": "Volume: {volume}%"
   },
   "cpu": {
     "interval": 2,
@@ -127,8 +134,8 @@
     "on-click": "kitty -e btop",
     "states": {
       "warning": 70,
-      "critical": 90,
-    },
+      "critical": 90
+    }
   },
   "custom/gpu": {
     "format": "󰆦 {}%",
@@ -136,7 +143,7 @@
     "exec": "~/.config/waybar/scripts/gpu.sh",
     "tooltip": true,
     "tooltip-format": "GPU Usage: {}%",
-    "on-click": "kitty -e nvidia-smi",
+    "on-click": "kitty -e nvidia-smi"
   },
   "memory": {
     "interval": 5,
@@ -146,24 +153,29 @@
     "on-click": "kitty -e btop",
     "states": {
       "warning": 70,
-      "critical": 90,
-    },
+      "critical": 90
+    }
   },
   "custom/vram": {
     "format": "󰆦 {}",
     "interval": 5,
     "exec": "~/.config/waybar/scripts/vram.sh",
     "return-type": "json",
-    "on-click": "kitty -e nvidia-smi",
+    "on-click": "kitty -e nvidia-smi"
   },
   "temperature": {
     "interval": 5,
     "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
     "critical-threshold": 80,
     "format": "{icon} {temperatureC}°C",
-    "format-icons": ["", "", "", ""],
+    "format-icons": [
+      "",
+      "",
+      "",
+      ""
+    ],
     "tooltip": true,
-    "on-click": "kitty -e sensors",
+    "on-click": "kitty -e sensors"
   },
   "disk": {
     "interval": 30,
@@ -173,18 +185,18 @@
     "tooltip-format": "Disk: {used} / {total}",
     "states": {
       "warning": 70,
-      "critical": 90,
-    },
+      "critical": 90
+    }
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "󰅶",
-      "deactivated": "󰾪",
+      "deactivated": "󰾪"
     },
     "tooltip": true,
     "tooltip-format-activated": "Screen won't lock",
-    "tooltip-format-deactivated": "Screen will lock",
+    "tooltip-format-deactivated": "Screen will lock"
   },
   "network": {
     "interval": 5,
@@ -193,11 +205,11 @@
     "format-disconnected": "󰌙 Disconnected",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
     "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
-    "on-click": "nm-connection-editor",
+    "on-click": "nm-connection-editor"
   },
   "tray": {
     "spacing": 10,
-    "icon-size": 16,
+    "icon-size": 16
   },
   "clock": {
     "interval": 1,
@@ -213,13 +225,13 @@
         "days": "<span color='#ddc7a1'>{}</span>",
         "weeks": "<span color='#89b482'>W{}</span>",
         "weekdays": "<span color='#a9b665'><b>{}</b></span>",
-        "today": "<span color='#ea6962'><b><u>{}</u></b></span>",
-      },
+        "today": "<span color='#ea6962'><b><u>{}</u></b></span>"
+      }
     },
     "actions": {
       "on-click-right": "mode",
       "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down",
-    },
-  },
+      "on-scroll-down": "shift_down"
+    }
+  }
 }

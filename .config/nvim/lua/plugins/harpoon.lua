@@ -5,7 +5,7 @@ return {
   "ThePrimeagen/harpoon",
   opts = {
     settings = {
-      key = function() return vim.fs.root(0, ".git") or vim.loop.cwd() end,
+      key = function() return vim.fs.root(0, ".git") or vim.uv.cwd() end,
     },
   },
   -- harpoon2's setup is a method (`Harpoon:setup`), so it must be called with `:`,
