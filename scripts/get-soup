@@ -7,9 +7,19 @@ if [ -z "${RECIPE_SLUG}" ]; then
   read -p "Enter recipe slug: " RECIPE_SLUG
 fi
 
-URL_BASE="https://www.mob.co.uk/_next/data/bAaEbjdFPifIrHK6HIk0P/recipes/"
+USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 
-curl "$URL_BASE$RECIPE_SLUG.json" --compressed -H 'Accept: */*' -H 'Accept-Language: en-GB,en;q=0.5' -H 'Accept-Encoding: gzip, deflate' -H 'purpose: prefetch' -H 'x-nextjs-data: 1' -H 'DNT: 1' -H 'Connection: keep-alive' -H 'Priority: u=4' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' | jq '
+# Next.js build ID changes on every deploy, so scrape the current one from the
+# recipe page rather than hardcoding it (stale IDs get served a Cloudflare block page).
+BUILD_ID=$(curl -s "https://www.mob.co.uk/recipes/$RECIPE_SLUG" -H "User-Agent: $USER_AGENT" | grep -o '"buildId":"[^"]*"' | head -1 | cut -d'"' -f4)
+if [ -z "${BUILD_ID}" ]; then
+  echo "Failed to resolve Next.js build ID (bad slug or site blocked the request)" >&2
+  exit 1
+fi
+
+URL_BASE="https://www.mob.co.uk/_next/data/$BUILD_ID/recipes/"
+
+curl "$URL_BASE$RECIPE_SLUG.json" --compressed -H 'Accept: */*' -H 'Accept-Language: en-GB,en;q=0.5' -H 'Accept-Encoding: gzip, deflate' -H 'purpose: prefetch' -H 'x-nextjs-data: 1' -H "User-Agent: $USER_AGENT" -H 'DNT: 1' -H 'Connection: keep-alive' -H 'Priority: u=4' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' | jq '
   # Extract basic recipe details
   .pageProps.recipe as $recipe |
   
@@ -26,7 +36,7 @@ curl "$URL_BASE$RECIPE_SLUG.json" --compressed -H 'Accept: */*' -H 'Accept-Langu
     
     # Extract step-by-step method descriptions (stripping HTML tags)
     method: [
-      $recipe.method[] | .description | gsub("<[^>]*>"; "")
+      $recipe.method[] | select(.description != null) | .description | gsub("<[^>]*>"; "")
     ],
     
     # Extract dietary requirements
